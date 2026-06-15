@@ -1,0 +1,98 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "church-nav.js",
+              "image-slot.js"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Pretendard|Noto Serif KR))/i]",
+        "message": "Font not provided by the design system. Available: Pretendard, Noto Serif KR."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {},
+    "tokens": [
+      "--brass",
+      "--brass-deep",
+      "--cream",
+      "--cream-deep",
+      "--ink",
+      "--ink-soft",
+      "--line",
+      "--line-soft",
+      "--maxw",
+      "--muted",
+      "--paper",
+      "--sage",
+      "--sans",
+      "--serif",
+      "--shadow-md",
+      "--shadow-sm",
+      "--white"
+    ],
+    "tokenKinds": {
+      "--ink": "color",
+      "--ink-soft": "color",
+      "--cream": "color",
+      "--cream-deep": "color",
+      "--paper": "color",
+      "--brass": "color",
+      "--brass-deep": "color",
+      "--sage": "color",
+      "--line": "color",
+      "--line-soft": "color",
+      "--white": "color",
+      "--muted": "color",
+      "--shadow-sm": "shadow",
+      "--shadow-md": "shadow",
+      "--serif": "font",
+      "--sans": "font",
+      "--maxw": "spacing"
+    },
+    "fontFamilies": [
+      "Noto Serif KR",
+      "Pretendard"
+    ]
+  }
+}

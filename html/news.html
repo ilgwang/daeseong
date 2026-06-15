@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!--===================== meta =====================-->
+<meta name="naver-site-verification" content="7729d4479a13c04614b08d00e8bd54f47df4a57c"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<meta name="subject" content="교회소식 — 대성교회"/>
+<meta name="title" content="교회소식 — 대성교회"/>
+<meta name="author" content="카야솔루션"/>
+<meta name="description" content="대성교회 소식을 확인하세요. 행사, 공지사항, 소식 등"/>
+<meta name="keywords" content="대성교회, 교회, 손정열 목사, 대성교회 손정렬, 송파구 대성교회, 오금동 대성교회, www.daeseong.or.kr">
+<meta name="copyright" content="대성교회" />
+<meta property="og:type" content="website">
+<meta property="og:title" content="교회소식 — 대성교회">
+<meta property="og:description" content="대성교회 소식을 확인하세요. 행사, 공지사항, 소식 등">
+<meta property="og:image" content="http://www.daeseong.or.kr/image/sns_logo.png"/>
+<meta property="og:url" content="http://www.daeseong.or.kr">
+<!--==============================================-->
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<title>교회소식 — 대성교회</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script><link rel="stylesheet" href="/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/css/font.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css?ver=2007171434">
+<link rel="stylesheet" type="text/css" href="/css/responsible.css?ver=2007171434">
+<!-- popup -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<!-- popup -->
+<!--script src="/inc/respond.mion.js"></script-->
+<script src="/inc/modernizr-2.6.2.min.js"></script>
+<!--script src="/inc/css_browser_selector.js" type="text/javascript"></script>
+<script src="/css/respond.min.js"></script-->
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<link rel="stylesheet" href="/css/ie.css">
+<![endif]-->
+<!--[if lt IE 9]>
+<script src="https://raw.githubusercontent.com/scottjehl/Respond/master/dest/respond.min.js"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="/css/modern-design.css">
+<link rel="stylesheet" href="/css/sermons-gallery.css">
+<style>
+	.news-page-title {
+		color: #fff;
+		padding: 195px 0;
+		text-align: center;
+		position: relative;
+		overflow: hidden;
+		background: url(/image/board3.jpg) no-repeat center / 100% auto;
+	}
+
+	.news-page-title::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(ellipse at 20% 20%, rgba(45, 95, 141, 0.5), transparent),
+					radial-gradient(ellipse at 80% 80%, rgba(45, 95, 141, 0.4), transparent);
+		pointer-events: none;
+	}
+
+	.news-page-title h1 {
+		font-size: 48px;
+		font-weight: 700;
+		margin-bottom: 15px;
+		font-family: "Noto Sans KR", "Pretendard", sans-serif;
+		letter-spacing: -0.02em;
+		position: relative;
+		z-index: 1;
+	}
+
+	.news-page-title p {
+		font-size: 18px;
+		color: rgba(255, 255, 255, 0.9);
+		max-width: 600px;
+		margin: 0 auto;
+		line-height: 1.6;
+		position: relative;
+		z-index: 1;
+	}
+
+	.news-container {
+		width: 1100px;
+		margin: 0 auto;
+		padding: 60px 20px;
+	}
+
+	.news-filters {
+		display: flex;
+		gap: 15px;
+		margin-bottom: 50px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.news-filter-btn {
+		padding: 12px 28px;
+		border: 2px solid #d4a574;
+		background: transparent;
+		color: #2d5f8d;
+		border-radius: 8px;
+		cursor: pointer;
+		font-weight: 600;
+		font-size: 15px;
+		transition: all 0.3s ease;
+		font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	}
+
+	.news-filter-btn:hover,
+	.news-filter-btn.active {
+		background: #2d5f8d;
+		color: #fff;
+		border-color: #2d5f8d;
+	}
+
+	.news-list {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 30px;
+		margin-bottom: 60px;
+	}
+
+	.news-item {
+		background: #fff;
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		transition: all 0.35s cubic-bezier(0.23, 1, 0.320, 1);
+		text-decoration: none;
+		color: inherit;
+		display: flex;
+		flex-direction: column;
+		padding: 30px 25px;
+		border-top: 4px solid #d4a574;
+	}
+
+	.news-item:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	}
+
+	.news-icon {
+		font-size: 48px;
+		margin-bottom: 15px;
+		text-align: center;
+	}
+
+	.news-content {
+		flex: 1;
+	}
+
+	.news-date {
+		font-size: 13px;
+		color: #d4a574;
+		font-weight: 600;
+		margin-bottom: 8px;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.news-title {
+		font-size: 18px;
+		font-weight: 700;
+		color: #2d5f8d;
+		margin-bottom: 10px;
+		line-height: 1.4;
+		font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	}
+
+	.news-desc {
+		font-size: 14px;
+		color: #666;
+		line-height: 1.6;
+	}
+
+	.news-pagination {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin-top: 50px;
+	}
+
+	.pagination-btn {
+		min-width: 45px;
+		height: 45px;
+		border: 1px solid #d4a574;
+		background: transparent;
+		color: #2d5f8d;
+		border-radius: 8px;
+		cursor: pointer;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	}
+
+	.pagination-btn:hover,
+	.pagination-btn.active {
+		background: #2d5f8d;
+		color: #fff;
+		border-color: #2d5f8d;
+	}
+
+	@media (max-width: 1024px) {
+		.news-container {
+			width: calc(100% - 40px);
+		}
+	}
+
+	@media (max-width: 1024px) {
+		.news-list {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 20px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.news-page-title h1 {
+			font-size: 32px;
+		}
+
+		.news-page-title p {
+			font-size: 16px;
+		}
+
+		.news-container {
+			padding: 40px 16px;
+		}
+
+		.news-list {
+			grid-template-columns: 1fr;
+			gap: 16px;
+		}
+
+		.news-filters {
+			gap: 10px;
+		}
+
+		.news-filter-btn {
+			padding: 10px 20px;
+			font-size: 14px;
+		}
+	}
+</style>
+</head>
+<body>
+<div id="wrap">
+	<!-- main_section -->
+	<div id="vis_sec" class="vis_sec_bg" style="padding: 0px;">
+		<!-- header -->
+		<header id="header">
+			<link rel="stylesheet" href="/css/superfish.css">
+			<link rel="stylesheet" href="/css/style.css">
+			<link rel="stylesheet" href="/css/slicknav.css">
+			<script src="/member/js/jquery.popup.js"></script>
+			<script type="text/javascript" src="/inc/layerpop.js"></script>
+			<script src="/css/jquery.slicknav.js"></script>
+			<script type="text/javascript">
+			$(document).ready(function(){
+				$('.popdown').popdown();
+				$('#menu').slicknav();
+			});
+			</script>
+			<div class="header_top_item">
+				<ul class="top_section" style="right: -10px;">
+						<li><a href="/member/login.jsp">로그인</a></li>
+					<li><a href="/member/member_linker.jsp?slinker=/member/compose.do" class="popdown">회원가입</a></li>
+			    </ul>
+				<h1><a href="/html/index.html"><img src="/image/index_logo_daeseong.png?ver=2004271104" alt="대성교회" /></a></h1>
+				<div id="m_nav"></div>
+				<div class="header_gnb">
+					<div class="main_nav" style="right: -12px;">
+						<nav class="nav">
+							<ul class="sf-menu" id="menu">
+								<li><a href="/html/about.html">교회소개</a>
+									<ul class="menu_hidden">
+										<li><a href="/html/about.html">교회소개</a></li>
+									</ul>
+								</li>
+								<li><a href="/html/sermons-gallery.html">설교영상</a>
+								</li>
+								<li><a href="/html/news.html">커뮤니티</a>
+								</li>
+								<li><a href="/html/location.html">오시는길</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+	</div>
+
+	<!-- Page Title -->
+	<div class="news-page-title">
+	</div>
+
+	<!-- Main Content -->
+	<div class="news-container">
+		<!-- Filters -->
+		<div class="news-filters">
+			<button class="news-filter-btn active" data-filter="all">전체</button>
+			<button class="news-filter-btn" data-filter="gospel">복음통일</button>
+			<button class="news-filter-btn" data-filter="news">교회소식</button>
+			<button class="news-filter-btn" data-filter="bulletin">주보</button>
+			<button class="news-filter-btn" data-filter="poetry">시집</button>
+			<button class="news-filter-btn" data-filter="column">칼럼</button>
+			<button class="news-filter-btn" data-filter="study">Bible Study</button>
+		</div>
+
+		<!-- News List -->
+		<div class="news-list">
+			<!-- News Item 1 -->
+			<a href="#" class="news-item" data-type="gospel">
+				<div class="news-icon">✝️</div>
+				<div class="news-content">
+					<div class="news-date">2026년 6월 14일</div>
+					<div class="news-title">남북 통일을 위한 중보기도</div>
+					<div class="news-desc">남과 북의 성도들이 하나 되어 복음으로 통일을 향한 중보기도를 진행합니다.</div>
+				</div>
+			</a>
+
+			<!-- News Item 2 -->
+			<a href="#" class="news-item" data-type="news">
+				<div class="news-icon">📰</div>
+				<div class="news-content">
+					<div class="news-date">2026년 6월 10일</div>
+					<div class="news-title">교회 소식 - 새 신자 환영식</div>
+					<div class="news-desc">지난주 주일에 새로 입교한 성도들을 환영하는 특별한 시간을 가졌습니다.</div>
+				</div>
+			</a>
+
+			<!-- News Item 3 -->
+			<a href="#" class="news-item" data-type="bulletin">
+				<div class="news-icon">📄</div>
+				<div class="news-content">
+					<div class="news-date">2026년 6월 8일</div>
+					<div class="news-title">주보 - 6월 둘째주</div>
+					<div class="news-desc">주간 예배 안내 및 각 부서의 활동 일정이 담겨있습니다.</div>
+				</div>
+			</a>
+
+			<!-- News Item 4 -->
+			<a href="#" class="news-item" data-type="poetry">
+				<div class="news-icon">✨</div>
+				<div class="news-content">
+					<div class="news-date">2026년 6월 5일</div>
+					<div class="news-title">신앙의 시 - 주님의 사랑</div>
+					<div class="news-desc">성도들이 창작한 신앙 시와 영적 감동을 나누는 시간입니다.</div>
+				</div>
+			</a>
+
+			<!-- News Item 5 -->
+			<a href="#" class="news-item" data-type="column">
+				<div class="news-icon">✍️</div>
+				<div class="news-content">
+					<div class="news-date">2026년 5월 30일</div>
+					<div class="news-title">목사님 칼럼 - 믿음의 발걸음</div>
+					<div class="news-desc">담임목사님의 영적 통찰과 신앙의 깊이를 나누는 칼럼입니다.</div>
+				</div>
+			</a>
+
+			<!-- News Item 6 -->
+			<a href="#" class="news-item" data-type="study">
+				<div class="news-icon">📖</div>
+				<div class="news-content">
+					<div class="news-date">2026년 5월 25일</div>
+					<div class="news-title">성경 묵상 - 요한복음 3장 16절</div>
+					<div class="news-desc">말씀 공부와 영적 삶을 나누는 Bible Study/Devotion 자료입니다.</div>
+				</div>
+			</a>
+		</div>
+
+		<!-- Pagination -->
+		<div class="news-pagination">
+			<button class="pagination-btn">&lt;</button>
+			<button class="pagination-btn active">1</button>
+			<button class="pagination-btn">2</button>
+			<button class="pagination-btn">3</button>
+			<button class="pagination-btn">4</button>
+			<button class="pagination-btn">&gt;</button>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer>
+		<div class="inner_footer">
+			<p><img src="/image/footer_logo2.png" alt="" /></p>
+			<address>
+				<p>
+					<a href="#">온라인 헌금계좌 안내 &nbsp;&nbsp;&nbsp;&nbsp;예금주: &nbsp;대한예수교장로회 대성교회, &nbsp;&nbsp;국민은행, 867901-00-030346</a>
+				</p>
+				<script language="javascript">
+					var now = new Date();
+					document.write("우편번호 (17006) 경기도 용인시 기흥구 동백중앙로 175  우함빌딩 901호<br>");
+					document.write("E-Mail :  daeseong2013@naver.com  <br>");
+					document.write("Copyright ⓒ " + now.getFullYear() + " 대성교회 all right reserved");
+					document.write("&nbsp;&nbsp;<a href='http://www.caya.kr' target='_blank'><img src='/image/caya.png'></a>");
+				</script>
+			</address>
+		</div>
+	</footer>
+</div>
+
+<script>
+	// Filter functionality
+	document.querySelectorAll('.news-filter-btn').forEach(btn => {
+		btn.addEventListener('click', function() {
+			const filter = this.dataset.filter;
+			document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
+			this.classList.add('active');
+
+			const items = document.querySelectorAll('.news-item');
+			items.forEach(item => {
+				if (filter === 'all' || item.dataset.type === filter) {
+					item.style.display = 'flex';
+				} else {
+					item.style.display = 'none';
+				}
+			});
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+@import url('/css/nav.css');
+@import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+@ import url('http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css');
+
+#wrap{width:100%;}
+.content{width:100%; margin-bottom:30px;}
+
+/*header*/
+#header{width:100%; position:relative; z-index:999999}
+.header_top_item{width:1100px; margin:0 auto; position:relative; padding: 8px 0 12px 0;}
+.header_top_item > h1{font-size:0;}
+.header_top_item .top_section{position:absolute; right:11px; top:19px;}
+.header_top_item .top_section li{float:left; font-size:14px; letter-spacing:-0.5px;  background:url(/image/top_line.png) no-repeat 100% 50%;}
+.header_top_item .top_section li:last-child{background:none;}
+.header_top_item .top_section li a{font-family:"Malgun Gothic"; display:block; opacity:0.65; color:#fff; padding:0 8px;}
+
+/*gnb*/
+.header_gnb{position:absolute; right:-14px; top:57px;font-weight: bolder;
+    right: -51px;
+    font-family: " Noto Sans KR", " Pretendard", sans-serif;}
+
+/*visual*/
+#vis_sec{width:100%;}
+.vis_sec_bg{background:url(/image/vis_bg.jpg) no-repeat; width:100%; background-size:cover; padding-bottom:90px;}
+#main_vis{width:1098px; margin:0 auto; border:1px solid rgba(255,255,255,0.14);}
+
+/*content*/
+.main_banner{width:1100px; margin:30px auto 0; text-align:center;}
+.main_banner li{display:inline-block; margin:0 15.3px;  position:relative;}
+.main_banner li:first-child{margin-left:0}
+.main_banner li:last-child{margin-right:0}
+.main_banner a{color:#fff; display:block; width:100%; height:auto;}
+.main_banner div{position:absolute; width:100%; height:auto;top:45%;}
+.main_banner div p{font-size:20px; font-weight:500; margin-bottom:10px; text-align:center;}
+.main_banner div span{display:block; font-size:16px; line-height:140%;}
+
+/*footer*/
+footer{background:#232323;}
+.inner_footer{width:1100px; margin:0 auto; padding:20px 0; color:#999; font-size:13px; line-height:150%; overflow:hidden;}
+.inner_footer > p > img{margin-top:11px;}
+.inner_footer > p{float:left; margin-right:40px;}
+.inner_footer > address{float:left; padding:0 0 10px 0; margin-top:25px;}
+.inner_footer > address p{margin-bottom:10px; }
+.inner_footer > address p a{display:block; padding:5px 10px; background:#000; color:#999; font-size:14px; text-align: center;}
+.inner_footer > address p a:hover{color:#dadada; background:#562773;}

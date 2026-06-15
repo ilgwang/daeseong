@@ -1,0 +1,150 @@
+/*==µ¥½ºÅ©==*/
+@media screen and (max-width: 1200px) {
+
+	/*
+	.main_nav{margin:0 auto;max-width:58.750em;min-height:36px;position:relative;}
+	*/
+	/* nav */
+	/*
+	.nav{z-index:99;overflow:hidden;}
+	.nav ul li:first-child a{background-color:#b93a36;color:#fff;}
+	.nav ul li a{
+		float:left;
+		height:36px;
+		line-height:38px;
+		color:#747474;
+		font-size:14px;
+		font-weight:800;
+		display:block;
+		transition:background 0.3s, color 0.3s;
+		-moz-transition:background 0.3s, color 0.3s;
+		-webkit-transition:background 0.3s, color 0.3s;
+		-o-transition:background 0.3s, color 0.3s;
+
+	}
+	.nav ul li a:hover{background-color:#92c1e8;color:#fff;}
+	.nav ul li ul.menu_sub{display:none;}
+	*/
+
+	ul.main_vis_img li img{max-width:100%;}
+
+	ul.quick_banner li{float:left;}
+	ul.quick_banner li a img{width:100%;}
+	.contaner{max-width:90%;}
+}
+
+/*==ÅÂºí¸´==*/
+@media screen and (min-width: 768px) and (max-width: 1199px){
+
+	ul.quick_banner li{float:left;}
+	.contaner{max-width:97%;}
+	#sermon{max-width:48%;margin-right:15px;}
+	p.sermon_img{width:50%;float:left;}
+	.sermon_list{width:48%;float:left;padding-left:0;}
+	.sermon_list li{text-indent:15px;}
+	.sermon_icon{margin:10px 0 0 20px;}
+	#notice{max-width:48%;}
+	.notice_list dl{float:left;width:50%;padding-left:10px;}
+	.notice_list dl.no_img{width:100%;}
+    .ch_album li{float:left;max-width:24%;margin:0 3px 0 3px;}
+	.board{width:98%;margin-bottom:20px;}
+
+}
+
+/*==¸ð¹ÙÀÏ(°¡·Î)==*/
+@media screen and (max-width: 767px) {
+
+	.header_gnb{display:none;}
+
+	ul.quick_banner{padding:0 15px 0 15px;}
+	ul.quick_banner li{float:left;width:50%;}
+	ul.quick_banner li a img{width:100%;}
+
+	.contaner{max-width:95%;}
+	#sermon{max-width:100%;}
+	.sermon_list{width:48%;float:left;}
+	.sermon_icon{float:left;margin:10px 0 0 20px;}
+	#notice{max-width:100%;padding-left:0;margin-top:20px;}
+	.notice_list dl{float:left;width:50%;padding-left:10px;}
+	.notice_list dl.no_img{width:100%;}
+	p.notice_img{margin-bottom:15px;}
+	.ch_album li{float:left;width:47%;margin-bottom:15px;}
+	.ch_album li a img{width:100%;}
+	.sec1 article{overflow:hidden;float:none;width:100%;}
+	.board{width:98%;margin-bottom:20px;}
+	.board ul li{min-height:30px;}
+	.board ul li span.board_date{display:block;width:100%;}
+
+}
+
+/*==¸ð¹ÙÀÏ(¼¼·Î)==*/
+@media screen and (min-width: 320px) and (max-width: 640px){
+
+	.header_gnb{display:none;}
+	ul.header_item li{float:none;}
+	ul.header_item li.item1{width:100%;}
+	ul.header_item li.item2{width:100%;height:30px;margin:0;}
+	ul.header_item li.item3{width:100%;height:30px;margin:0;}
+
+	ul.favorite{float:left;padding-top:5px;}
+	ul.favorite li{float:left;margin-left:10px;}
+
+	ul.info_menu{float:left;padding:0;width:100%;}
+	ul.info_menu li{float:left;padding-left:15px;background:url(/image/info_bar.gif) no-repeat 5px 3px;}
+	ul.info_menu li.info_bar{background-image:none;}
+	ul.info_menu li a{font-weight:bold;color:#c8d0e4;}
+	ul.info_menu li a:hover{color:#fff;}
+
+	#sermon{max-width:100%;}
+	.sermon_list{width:50%;padding-left:0;margin-top:15px;}
+	.notice_list dl{width:100%;padding:0;}
+	.notice_img{width:100%;}
+	.notice_img img{width:100%;}
+	p.sermon_img{width:100%;float:none;}
+	p.sermon_img img{width:100%;}
+	.sec2{width:100%;}
+	.ch_album{width:100%;}
+	.ch_album li{width:100%;float:none;}
+	.ch_album li a img{max-width:100%;}
+	.board ul li{min-height:30px;}
+	.board ul li span.board_date{display:block;width:100%;}
+
+	#in_footer address,.copy_logo{position:relative;color:#fff;}
+   .copy_logo{margin-left:4%;}
+    #in_footer address{margin:10% 0 0 5%;padding-right:20px;font-size:0.813em;}
+}
+
+/*******************************************************************************/
+/*******************************************************************************/
+@media screen and (max-width:1024px){
+   .header_gnb{display:none;}
+
+   .header_top_item{width:100%}
+   #vis_sec{padding-bottom:0;}
+   #main_vis{width:100%; border:0;}
+
+   .header_top_item > h1{padding-left:5px; width:130px;}
+
+   .header_top_item .top_section{right:0px;}
+   .header_top_item .top_section li{font-size:12px;}
+
+   .main_banner{width:95%; margin:15px auto; overflow:hidden;}
+   .main_banner li{float:left; width:25%; display:inline-block; margin:0; position:relative;}
+   .main_banner li a img{width:100%;}
+
+   .inner_footer{width:90%; margin:0 auto;  text-align:center; letter-spacing:-1px;}
+   .inner_footer > p{float:none; margin-right:0px;}
+   .inner_footer > address{float:none; padding-top:15px; margin-top:0}
+   .inner_footer > address img{display:inline-block; }
+	 .inner_footer > address p a{margin:0 auto; }
+}
+@media screen and (max-width:780px){
+    .main_banner li{width:50%;}
+}
+@media screen and (max-width:380px){
+   .header_top_item > h1{text-align:center; padding-top:30px; width:100px;}
+   .header_top_item .top_section{position:absolute; left:0; top:0; text-align:center; padding:5px 0; border-bottom:1px solid #4e2c64;}
+   .header_top_item .top_section li{float:none; display:inline-block; font-size:11px;}
+
+    .main_banner li{width:100%;}
+}

@@ -1,0 +1,572 @@
+/* ========================================
+   대성교회 교회소개 CSS
+   ======================================== */
+
+.about-page-title {
+	color: #fff;
+	padding: 153px 0;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+	background: url(/image/aboutbg.jpg) no-repeat center / 100% auto;
+}
+
+.about-page-title::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse at 20% 20%, rgba(45, 95, 141, 0.5), transparent),
+				radial-gradient(ellipse at 80% 80%, rgba(45, 95, 141, 0.4), transparent);
+	pointer-events: none;
+}
+
+.about-page-title h1 {
+	font-size: 48px;
+	font-weight: 700;
+	margin-bottom: 15px;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	letter-spacing: -0.02em;
+	position: relative;
+	z-index: 1;
+}
+
+.about-page-title p {
+	font-size: 18px;
+	color: rgba(255, 255, 255, 0.9);
+	max-width: 600px;
+	margin: 0 auto;
+	line-height: 1.6;
+	position: relative;
+	z-index: 1;
+}
+
+.about-page-title .verse-ref {
+	font-size: 14px;
+	color: #d4a574;
+	font-weight: 600;
+	margin-top: 15px;
+	letter-spacing: 0.05em;
+}
+
+.about-container {
+	width: 1100px;
+	margin: 0 auto;
+	padding: 60px 20px;
+}
+
+/* Church Vision Section */
+.church-vision {
+	margin-bottom: 80px;
+	text-align: center;
+}
+
+.about-page-title .bible-verse {
+	margin-bottom: 40px;
+}
+
+.about-page-title .bible-verse p {
+	font-size: 18px;
+	color: #fff;
+	line-height: 1.8;
+	margin-bottom: 12px;
+	font-family: "Pretendard", sans-serif;
+	font-weight: 500;
+}
+
+.about-page-title .bible-verse p:last-child {
+	margin-bottom: 0;
+}
+
+.about-page-title .verse-ref {
+	font-size: 14px !important;
+	color: #d4a574;
+	font-weight: 600;
+	margin-top: 15px !important;
+	letter-spacing: 0.05em;
+}
+
+.about-page-title .church-message {
+	margin-bottom: 50px;
+}
+
+.about-page-title .church-message p {
+	font-size: 18px;
+	color: #fff;
+	line-height: 1.8;
+	font-family: "Pretendard", sans-serif;
+	font-weight: 500;
+}
+
+.about-page-title .church-values {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 30px;
+	margin-bottom: 50px;
+}
+
+.about-page-title .value-item {
+	background: rgba(255, 255, 255, 0.1);
+	padding: 25px 20px;
+	border-radius: 8px;
+	border-top: 3px solid #d4a574;
+	font-size: 16px;
+	color: #fff;
+	font-weight: 600;
+	line-height: 1.6;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
+}
+
+.about-page-title .value-item:hover {
+	background: rgba(255, 255, 255, 0.15);
+	transform: translateY(-4px);
+}
+
+.about-page-title .church-info {
+	padding: 30px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	border-top: 4px solid #d4a574;
+	backdrop-filter: blur(10px);
+}
+
+.about-page-title .church-info p {
+	font-size: 15px;
+	color: #fff;
+	line-height: 1.8;
+	margin: 0;
+	font-family: "Pretendard", sans-serif;
+}
+
+.about-page-title .church-info p:first-child {
+	color: #d4a574;
+	font-weight: 600;
+	font-size: 16px;
+	margin-bottom: 10px;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+/* Regular church-vision styles for other pages */
+.church-vision {
+	margin-bottom: 80px;
+	text-align: center;
+}
+
+.church-vision .bible-verse {
+	margin-bottom: 40px;
+	padding: 40px;
+	background: linear-gradient(135deg, rgba(45, 95, 141, 0.05) 0%, rgba(212, 165, 116, 0.05) 100%);
+	border-left: 4px solid #d4a574;
+	border-radius: 8px;
+}
+
+.church-vision .bible-verse p {
+	font-size: 18px;
+	color: #2d5f8d;
+	line-height: 1.8;
+	margin-bottom: 12px;
+	font-family: "Pretendard", sans-serif;
+	font-weight: 500;
+}
+
+.church-vision .bible-verse p:last-child {
+	margin-bottom: 0;
+}
+
+.church-vision .verse-ref {
+	font-size: 14px !important;
+	color: #d4a574;
+	font-weight: 600;
+	margin-top: 15px !important;
+	letter-spacing: 0.05em;
+}
+
+.church-vision .church-message {
+	margin-bottom: 50px;
+}
+
+.church-vision .church-message p {
+	font-size: 18px;
+	color: #2d5f8d;
+	line-height: 1.8;
+	font-family: "Pretendard", sans-serif;
+	font-weight: 500;
+}
+
+.church-vision .church-values {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 30px;
+	margin-bottom: 50px;
+}
+
+.church-vision .value-item {
+	background: #f5f7fa;
+	padding: 30px 20px;
+	border-radius: 8px;
+	border-top: 3px solid #d4a574;
+	font-size: 16px;
+	color: #2d5f8d;
+	font-weight: 600;
+	line-height: 1.6;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	transition: all 0.3s ease;
+}
+
+.church-vision .value-item:hover {
+	background: #e8ecf1;
+	transform: translateY(-4px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.church-vision .church-info {
+	padding: 30px;
+	background: #fff;
+	border-radius: 8px;
+	border-top: 4px solid #2d5f8d;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.church-vision .church-info p {
+	font-size: 15px;
+	color: #666;
+	line-height: 1.8;
+	margin: 0;
+	font-family: "Pretendard", sans-serif;
+}
+
+.church-vision .church-info p:first-child {
+	color: #2d5f8d;
+	font-weight: 600;
+	font-size: 16px;
+	margin-bottom: 10px;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+/* Vision & Mission */
+.vision-mission {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 40px;
+	margin-bottom: 80px;
+}
+
+.vision-card {
+	background: linear-gradient(135deg, #2d5f8d 0%, #4a7ba7 100%);
+	color: #fff;
+	padding: 40px;
+	border-radius: 12px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	transition: all 0.35s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.vision-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+}
+
+.vision-card h2 {
+	font-size: 28px;
+	margin-bottom: 20px;
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.vision-card p {
+	font-size: 16px;
+	line-height: 1.8;
+	opacity: 0.95;
+	font-family: "Pretendard", sans-serif;
+}
+
+/* Pastor Section */
+.pastor-section {
+	margin-bottom: 80px;
+	background: #f5f7fa;
+	padding: 60px;
+	border-radius: 12px;
+}
+
+.pastor-section h2 {
+	font-size: 32px;
+	color: #2d5f8d;
+	margin-bottom: 40px;
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	text-align: center;
+}
+
+.pastor-content {
+	display: grid;
+	grid-template-columns: 0.6fr 1.4fr;
+	gap: 40px;
+	align-items: center;
+}
+
+.pastor-image {
+	overflow: hidden;
+	border-radius: 12px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	height: 100%;
+	width: 366px;
+}
+
+.pastor-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.35s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.pastor-image:hover img {
+	transform: scale(1.05);
+}
+
+.pastor-info {
+	background: #fff;
+	padding: 40px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	border-top: 4px solid #d4a574;
+}
+
+.pastor-info h3 {
+	font-size: 24px;
+	color: #2d5f8d;
+	margin-bottom: 25px;
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.pastor-info h3 span {
+	font-size: 14px;
+	color: #d4a574;
+	font-weight: 500;
+	margin-left: 8px;
+	font-family: "Pretendard", sans-serif;
+	letter-spacing: 0.05em;
+}
+
+.pastor-details p {
+	font-size: 15px;
+	color: #2d5f8d;
+	font-weight: 600;
+	margin-bottom: 12px;
+	margin-top: 20px;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.pastor-details p:first-child {
+	margin-top: 0;
+}
+
+.pastor-details ul {
+	list-style: none;
+	padding-left: 0;
+	margin-bottom: 0;
+}
+
+.pastor-details li {
+	padding: 8px 0;
+	padding-left: 20px;
+	position: relative;
+	color: #666;
+	font-size: 14px;
+	font-family: "Pretendard", sans-serif;
+}
+
+.pastor-details li::before {
+	content: '▸';
+	position: absolute;
+	left: 0;
+	color: #d4a574;
+	font-weight: bold;
+}
+
+/* History Section */
+.history-section {
+	margin-bottom: 80px;
+}
+
+.history-section h2 {
+	font-size: 32px;
+	color: #2d5f8d;
+	margin-bottom: 50px;
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	text-align: center;
+}
+
+.timeline {
+	position: relative;
+	padding: 20px 0;
+}
+
+.timeline::before {
+	content: '';
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 2px;
+	height: 100%;
+	background: linear-gradient(180deg, #d4a574, #2d5f8d);
+}
+
+.timeline-item {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 40px;
+	margin-bottom: 50px;
+	position: relative;
+}
+
+.timeline-item:nth-child(even) {
+	grid-template-columns: 1fr 1fr;
+}
+
+.timeline-item:nth-child(even) .timeline-year {
+	order: 2;
+	text-align: left;
+	padding-left: 40px;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+	order: 1;
+	text-align: right;
+	padding-right: 40px;
+}
+
+.timeline-item:nth-child(odd) .timeline-year {
+	text-align: right;
+	padding-right: 40px;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+	text-align: left;
+	padding-left: 40px;
+}
+
+.timeline-year {
+	font-size: 28px;
+	font-weight: 700;
+	color: #d4a574;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 2;
+}
+
+.timeline-item::after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 20px;
+	transform: translateX(-50%);
+	width: 12px;
+	height: 12px;
+	background: #d4a574;
+	border: 3px solid #fff;
+	border-radius: 50%;
+	box-shadow: 0 0 0 2px #2d5f8d;
+	z-index: 3;
+}
+
+.timeline-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.timeline-content h4 {
+	font-size: 18px;
+	color: #2d5f8d;
+	margin-bottom: 10px;
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.timeline-content p {
+	font-size: 14px;
+	color: #666;
+	line-height: 1.6;
+	font-family: "Pretendard", sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+	.about-container {
+		width: calc(100% - 40px);
+	}
+
+	.vision-mission {
+		grid-template-columns: 1fr;
+	}
+
+	.pastor-content {
+		grid-template-columns: 1fr;
+	}
+
+	.timeline {
+		padding: 20px 0;
+	}
+
+	.timeline::before {
+		left: 20px;
+	}
+
+	.timeline-item {
+		grid-template-columns: 50px 1fr !important;
+		gap: 20px;
+	}
+
+	.timeline-year {
+		font-size: 18px;
+		padding: 0 !important;
+		text-align: center !important;
+	}
+
+	.timeline-content {
+		text-align: left !important;
+		padding: 0 !important;
+	}
+
+	.timeline-item::after {
+		left: 20px;
+	}
+}
+
+@media (max-width: 768px) {
+	.about-page-title h1 {
+		font-size: 32px;
+	}
+
+	.about-page-title p {
+		font-size: 16px;
+	}
+
+	.about-container {
+		padding: 40px 16px;
+	}
+
+	.pastor-section {
+		padding: 40px 20px;
+	}
+
+	.vision-card {
+		padding: 30px;
+	}
+
+	.pastor-info {
+		padding: 30px;
+	}
+
+	.org-item {
+		min-width: 100px;
+		padding: 12px 20px;
+		font-size: 12px;
+	}
+}

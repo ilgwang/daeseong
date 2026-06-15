@@ -1,0 +1,474 @@
+/* ========================================
+   대성교회 모던 디자인 CSS
+   ======================================== */
+
+/* 웹폰트 임포트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+/* 색상 변수 */
+:root {
+	--primary: #2d5f8d;
+	--primary-light: #4a7ba7;
+	--accent: #d4a574;
+	--accent-dark: #b8935f;
+	--dark: #1a2a3a;
+	--light: #f5f7fa;
+	--text: #333;
+	--text-light: #666;
+	--border: #e0e0e0;
+	--shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* 기본 스타일 */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: "Pretendard", "Noto Sans KR", sans-serif;
+	color: var(--text);
+	background-color: #fff;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	font-weight: 400;
+}
+
+/* 제목용 폰트 */
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+/* 굵은 텍스트 */
+strong, b {
+	font-weight: 600;
+}
+
+/* 링크 */
+a {
+	font-weight: 500;
+}
+
+/* ========== HEADER ========== */
+#header {
+	width: 100%;
+	position: relative;
+	z-index: 999999;
+	background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+	box-shadow: var(--shadow);
+}
+
+.header_top_item {
+	width: 1100px;
+	margin: 0 auto;
+	position: relative;
+	padding: 8px 0 12px 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header_top_item > h1 {
+	font-size: 0;
+	flex: 0 0 auto;
+}
+
+.header_top_item h1 a {
+	display: inline-block;
+	transition: transform 0.3s ease;
+}
+
+.header_top_item h1 a:hover {
+	transform: scale(1.05);
+}
+
+.header_top_item h1 img {
+	max-height: 110px;
+	width: auto;
+}
+
+/* 상단 메뉴 */
+.top_section {
+	display: flex;
+	gap: 20px;
+	list-style: none;
+}
+
+.top_section li {
+	font-size: 13px;
+}
+
+.top_section li a {
+	color: rgba(255, 255, 255, 0.9);
+	text-decoration: none;
+	padding: 6px 10px;
+	border-radius: 4px;
+	transition: all 0.3s ease;
+	font-weight: 500;
+}
+
+.top_section li a:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+	color: #fff;
+
+}
+
+/* 네비게이션 */
+.header_gnb {
+	position: relative;
+	top: auto;
+	right: auto;
+}
+
+#menu {
+	list-style: none;
+	display: flex;
+	gap: 0;
+}
+
+#menu > li {
+	position: relative;
+}
+
+#menu > li > a {
+	display: block;
+	padding: 18px 22px;
+	color: rgba(255, 255, 255, 0.95);
+	text-decoration: none;
+	font-size: 15px;
+	font-weight: 700;
+	transition: all 0.3s ease;
+	border-bottom: 3px solid transparent;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	letter-spacing: -0.01em;
+}
+
+#menu > li > a:hover {
+	background-color: rgba(57, 2, 73, 0.1);
+	color: #fff;
+}
+
+/* 드롭다운 메뉴 */
+#menu ul {
+	list-style: none;
+}
+
+#menu ul li {
+	float: left;
+}
+
+#menu ul li a {
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	letter-spacing: -0.01em;
+}
+
+/* ========== MAIN VISUAL ========== */
+#vis_sec {
+	width: 100%;
+	background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+	padding-bottom: 60px;
+}
+
+.vis_sec_bg {
+	width: 100%;
+	padding-bottom: 60px;
+}
+
+#main_vis {
+	width: 1100px;
+	margin: 40px auto 0;
+	border: none;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: var(--shadow-lg);
+	background: #f0f0f0;
+}
+
+.bxslider {
+	list-style: none;
+}
+
+.bxslider li {
+	min-height: 400px;
+}
+
+.bxslider img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+/* ========== MAIN BANNER ========== */
+.content {
+	width: 100%;
+	margin-bottom: 40px;
+	background: linear-gradient(180deg, rgba(45, 95, 141, 0.02) 0%, transparent 100%);
+	padding: 40px 0;
+	overflow-x: auto;
+}
+
+.main_banner {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
+	list-style: none;
+	padding: 0 20px;
+}
+
+.main_banner li {
+	position: relative;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: var(--shadow);
+	transition: all 0.35s cubic-bezier(0.23, 1, 0.320, 1);
+	aspect-ratio: 4/3;
+	flex-shrink: 0;
+	min-width: 0;
+}
+
+.main_banner li:hover {
+	transform: translateY(-8px);
+	box-shadow: var(--shadow-lg);
+}
+
+.main_banner a {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	text-decoration: none;
+	overflow: hidden;
+}
+
+.main_banner img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.4s ease;
+}
+
+.main_banner li:hover img {
+	transform: scale(1.08);
+}
+
+.main_banner div {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, rgba(45, 95, 141, 0.7) 0%, rgba(45, 95, 141, 0.5) 100%);
+	transition: all 0.3s ease;
+}
+
+.main_banner li:hover div {
+	background: linear-gradient(135deg, rgba(45, 95, 141, 0.85) 0%, rgba(45, 95, 141, 0.65) 100%);
+}
+
+.main_banner div p {
+	font-size: 24px;
+	font-weight: 700;
+	margin-bottom: 8px;
+	text-align: center;
+	letter-spacing: -0.02em;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.main_banner div span {
+	display: block;
+	font-size: 14px;
+	line-height: 1.6;
+	text-align: center;
+	opacity: 0.9;
+	font-family: "Pretendard", sans-serif;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+}
+
+/* ========== FOOTER ========== */
+footer {
+	background: linear-gradient(135deg, var(--dark) 0%, #0f1a26 100%);
+	color: #999;
+	padding: 40px 0 20px;
+	border-top: 4px solid var(--accent);
+}
+
+.inner_footer {
+	width: 1100px;
+	margin: 0 auto;
+	color: #aaa;
+	font-size: 13px;
+	line-height: 1.8;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 40px;
+	align-items: start;
+}
+
+.inner_footer > p {
+	margin: 0;
+}
+
+.inner_footer > p img {
+	max-height: 50px;
+	width: auto;
+}
+
+.inner_footer > address {
+	padding: 0;
+	margin: 0;
+	font-style: normal;
+}
+
+.inner_footer > address p {
+	margin: 8px 0;
+}
+
+.inner_footer > address p a {
+	display: inline-block;
+	padding: 8px 16px;
+	background: rgba(255, 255, 255, 0.05);
+	color: #ccc;
+	font-size: 12px;
+	border-radius: 6px;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	font-family: "Pretendard", sans-serif;
+	font-weight: 500;
+}
+
+.inner_footer > address p a:hover {
+	background: var(--accent);
+	color: #fff;
+	border-color: var(--accent);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+	.header_top_item,
+	#main_vis,
+	.inner_footer {
+		width: calc(100% - 40px);
+	}
+
+	.main_banner {
+		gap: 16px;
+		padding: 0 20px;
+	}
+
+	#main_vis {
+		margin: 30px auto 0;
+	}
+}
+
+@media (max-width: 768px) {
+	.header_top_item {
+		flex-direction: column;
+		gap: 12px;
+		padding: 12px 20px;
+		width: calc(100% - 40px);
+	}
+
+	.top_section {
+		flex-wrap: wrap;
+		gap: 12px;
+		justify-content: center;
+	}
+
+	.main_banner {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 12px;
+		padding: 0 16px;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.main_banner li {
+		aspect-ratio: 4/3;
+	}
+
+	#main_vis {
+		margin: 20px auto 0;
+	}
+
+	.bxslider li {
+		min-height: 250px;
+	}
+
+	.main_banner div p {
+		font-size: 18px;
+	}
+
+	.inner_footer {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+}
+
+@media (max-width: 480px) {
+	.header_top_item {
+		padding: 10px 16px;
+		width: calc(100% - 32px);
+	}
+
+	.header_top_item h1 img {
+		max-height: 100px;
+	}
+
+	#menu {
+		font-size: 14px;
+	}
+
+	#menu > li > a {
+		padding: 16px 16px;
+	}
+
+	.main_banner {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 8px;
+		padding: 0 12px;
+	}
+
+	.main_banner li {
+		aspect-ratio: 4/3;
+	}
+
+	.main_banner div p {
+		font-size: 14px;
+		margin-bottom: 4px;
+	}
+
+	.main_banner div span {
+		font-size: 11px;
+	}
+
+	.bxslider li {
+		min-height: 200px;
+	}
+
+	.inner_footer {
+		width: calc(100% - 32px);
+		font-size: 12px;
+	}
+}

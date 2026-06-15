@@ -1,0 +1,210 @@
+/* ========================================
+   대성교회 오시는길 CSS
+   ======================================== */
+
+.location-page-title {
+	color: #fff;
+	padding: 195px 0;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+	background: url(/image/board4.jpg) no-repeat center / 100% auto;
+}
+
+.location-page-title::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse at 20% 20%, rgba(45, 95, 141, 0.5), transparent),
+				radial-gradient(ellipse at 80% 80%, rgba(45, 95, 141, 0.4), transparent);
+	pointer-events: none;
+}
+
+.location-page-title h1 {
+	font-size: 48px;
+	font-weight: 700;
+	margin-bottom: 15px;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	letter-spacing: -0.02em;
+	position: relative;
+	z-index: 1;
+}
+
+.location-page-title p {
+	font-size: 18px;
+	color: rgba(255, 255, 255, 0.9);
+	max-width: 600px;
+	margin: 0 auto;
+	line-height: 1.6;
+	position: relative;
+	z-index: 1;
+}
+
+.location-container {
+	width: 1100px;
+	margin: 0 auto;
+	padding: 60px 20px;
+}
+
+.location-content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 40px;
+	margin-bottom: 60px;
+	align-items: start;
+}
+
+.location-info {
+	background: #fff;
+	border-radius: 12px;
+	padding: 25px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.location-info h2 {
+	font-size: 24px;
+	color: #2d5f8d;
+	margin-bottom: 25px;
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.info-item {
+	padding-bottom: 12px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.info-item:last-child {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.info-label {
+	font-size: 13px;
+	color: #d4a574;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin-bottom: 8px;
+}
+
+.info-text {
+	font-size: 16px;
+	color: #333;
+	line-height: 1.8;
+	font-family: "Pretendard", sans-serif;
+}
+
+.info-text a {
+	color: #2d5f8d;
+	text-decoration: none;
+	border-bottom: 1px solid #2d5f8d;
+	transition: all 0.3s ease;
+}
+
+.info-text a:hover {
+	color: #d4a574;
+	border-bottom-color: #d4a574;
+}
+
+.location-map {
+	background: #f0f0f0;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	min-height: 280px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.map-placeholder {
+	text-align: center;
+	color: #999;
+}
+
+.map-placeholder svg {
+	width: 80px;
+	height: 80px;
+	margin-bottom: 15px;
+	opacity: 0.5;
+}
+
+.map-placeholder p {
+	font-size: 14px;
+	margin: 0;
+}
+
+.directions-section {
+	background: #f5f7fa;
+	border-radius: 12px;
+	padding: 40px;
+	margin-bottom: 60px;
+}
+
+.directions-section h2 {
+	font-size: 24px;
+	color: #2d5f8d;
+	margin-bottom: 30px;
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.direction-item {
+	margin-bottom: 25px;
+	padding-bottom: 25px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.direction-item:last-child {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.direction-title {
+	font-size: 16px;
+	font-weight: 700;
+	color: #2d5f8d;
+	margin-bottom: 12px;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.direction-description {
+	font-size: 14px;
+	color: #666;
+	line-height: 1.8;
+}
+
+@media (max-width: 1024px) {
+	.location-container {
+		width: calc(100% - 40px);
+	}
+
+	.location-content {
+		grid-template-columns: 1fr;
+		gap: 30px;
+	}
+}
+
+@media (max-width: 768px) {
+	.location-page-title h1 {
+		font-size: 32px;
+	}
+
+	.location-page-title p {
+		font-size: 16px;
+	}
+
+	.location-container {
+		padding: 40px 16px;
+	}
+
+	.location-info {
+		padding: 30px;
+	}
+
+	.directions-section {
+		padding: 30px;
+	}
+}
