@@ -51,12 +51,32 @@
 <link rel="stylesheet" href="/css/sermons-gallery.css">
 <style>
 	.news-page-title {
-		color: #fff;
-		padding: 195px 0;
-		text-align: center;
+		width: 100%;
+		background: url(/image/board3.jpg) no-repeat center / 100% 100%;
 		position: relative;
 		overflow: hidden;
-		background: url(/image/board3.jpg) no-repeat center / 100% auto;
+		min-height: 25vh;
+	}
+
+	.news-page-title::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(ellipse at 20% 20%, rgba(45, 95, 141, 0.5), transparent),
+					radial-gradient(ellipse at 80% 80%, rgba(45, 95, 141, 0.4), transparent);
+		pointer-events: none;
+	}
+
+	.page-title-inner {
+		width: 100%;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 195px 20px;
+		box-sizing: border-box;
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		color: #fff;
 	}
 
 	.news-page-title::before {
@@ -89,9 +109,11 @@
 	}
 
 	.news-container {
-		width: 1100px;
+		width: 100%;
+		max-width: 1100px;
 		margin: 0 auto;
 		padding: 60px 20px;
+		box-sizing: border-box;
 	}
 
 	.news-filters {

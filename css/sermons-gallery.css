@@ -24,13 +24,13 @@
 	gap: 12px !important;
 }
 
+/* Page Title */
 .sermon-page-title {
-	color: #fff;
-	padding: 195px 0;
-	text-align: center;
+	width: 100%;
+	background: url(/image/board2.jpg) no-repeat center / 100% 100%;
 	position: relative;
 	overflow: hidden;
-	background: url(/image/board2.jpg) no-repeat center / 100% auto;
+	min-height: 25vh;
 }
 
 .sermon-page-title::before {
@@ -42,14 +42,24 @@
 	pointer-events: none;
 }
 
+.page-title-inner {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 195px 20px;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 1;
+	text-align: center;
+	color: #fff;
+}
+
 .sermon-page-title h1 {
 	font-size: 48px;
 	font-weight: 700;
 	margin-bottom: 15px;
 	font-family: "Noto Sans KR", "Pretendard", sans-serif;
 	letter-spacing: -0.02em;
-	position: relative;
-	z-index: 1;
 }
 
 .sermon-page-title p {
@@ -58,14 +68,15 @@
 	max-width: 600px;
 	margin: 0 auto;
 	line-height: 1.6;
-	position: relative;
-	z-index: 1;
 }
 
+/* Main Container */
 .sermon-container {
-	width: 1100px;
+	width: 100%;
+	max-width: 1100px;
 	margin: 0 auto;
 	padding: 60px 20px;
+	box-sizing: border-box;
 }
 
 .sermon-filters {
@@ -136,9 +147,9 @@
 .sermon-thumb::after {
 	content: '';
 	position: absolute;
-	width: 70px;
-	height: 70px;
-	background: rgba(212, 165, 116, 0.9);
+	width: 60px;
+	height: 60px;
+	background: #361259;
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
@@ -147,20 +158,30 @@
 }
 
 .sermon-card:hover .sermon-thumb::after {
-	background: #d4a574;
+	background: #250B40;
 	transform: scale(1.1);
 }
 
 .sermon-thumb-icon {
 	position: absolute;
-	width: 70px;
-	height: 70px;
+	width: 60px;
+	height: 60px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	color: #fff;
-	font-size: 30px;
+	font-size: 25px;
 	z-index: 2;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.sermon-thumb-video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
 }
 
 .sermon-info {
@@ -232,10 +253,6 @@
 }
 
 @media (max-width: 1024px) {
-	.sermon-container {
-		width: calc(100% - 40px);
-	}
-
 	.sermon-grid {
 		grid-template-columns: repeat(2, 1fr);
 		gap: 20px;
@@ -249,10 +266,6 @@
 
 	.sermon-page-title p {
 		font-size: 16px;
-	}
-
-	.sermon-container {
-		padding: 40px 16px;
 	}
 
 	.sermon-grid {

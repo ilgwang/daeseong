@@ -71,7 +71,6 @@
 			<div class="header_top_item">
 				<ul class="top_section" style="right: -10px;">
 						<li><a href="/member/login.jsp">로그인</a></li>
-					<li><a href="/member/member_linker.jsp?slinker=/member/compose.do" class="popdown">회원가입</a></li>
 			    </ul>
 				<h1><a href="/html/index.html"><img src="/image/index_logo_daeseong.png?ver=2004271104" alt="대성교회" /></a></h1>
 				<div id="m_nav"></div>
@@ -115,80 +114,21 @@
 		<!-- Sermon Grid -->
 		<div class="sermon-grid">
 			<!-- Sermon Card 1 -->
-			<a href="#" class="sermon-card" data-type="sunday">
-				<div class="sermon-thumb">
+			<a href="#" class="sermon-card sermon-card-video" data-type="sunday" data-video-id="jlBSjgPmvYo" data-start="2">
+				<div class="sermon-thumb" style="background-image: url('https://img.youtube.com/vi/jlBSjgPmvYo/hqdefault.jpg'); background-size: cover; background-position: center;">
 					<div class="sermon-thumb-icon">▶</div>
+					<iframe class="sermon-thumb-video"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+						style="display: none;">
+					</iframe>
 				</div>
 				<div class="sermon-info">
-					<div class="sermon-date">2026년 6월 14일</div>
-					<div class="sermon-title">내 안에 거하라, 그리하면 열매를 맺으리라</div>
-					<div class="sermon-verse">요한복음 15:1–8</div>
-					<div class="sermon-pastor">담임목사 · 주일 1·2부 예배</div>
-				</div>
-			</a>
-
-			<!-- Sermon Card 2 -->
-			<a href="#" class="sermon-card" data-type="sunday">
-				<div class="sermon-thumb">
-					<div class="sermon-thumb-icon">▶</div>
-				</div>
-				<div class="sermon-info">
-					<div class="sermon-date">2026년 6월 7일</div>
-					<div class="sermon-title">흔들리지 않는 믿음의 터</div>
-					<div class="sermon-verse">마태복음 7:24–27</div>
-					<div class="sermon-pastor">담임목사 · 주일 1·2부 예배</div>
-				</div>
-			</a>
-
-			<!-- Sermon Card 3 -->
-			<a href="#" class="sermon-card" data-type="wednesday">
-				<div class="sermon-thumb">
-					<div class="sermon-thumb-icon">▶</div>
-				</div>
-				<div class="sermon-info">
-					<div class="sermon-date">2026년 6월 10일</div>
-					<div class="sermon-title">성령께서 하시는 일</div>
-					<div class="sermon-verse">사도행전 2:1–13</div>
-					<div class="sermon-pastor">담임목사 · 수요기도회</div>
-				</div>
-			</a>
-
-			<!-- Sermon Card 4 -->
-			<a href="#" class="sermon-card" data-type="sunday">
-				<div class="sermon-thumb">
-					<div class="sermon-thumb-icon">▶</div>
-				</div>
-				<div class="sermon-info">
-					<div class="sermon-date">2026년 5월 31일</div>
-					<div class="sermon-title">다시 일어서는 은혜</div>
-					<div class="sermon-verse">이사야 40:28–31</div>
-					<div class="sermon-pastor">담임목사 · 주일 1·2부 예배</div>
-				</div>
-			</a>
-
-			<!-- Sermon Card 5 -->
-			<a href="#" class="sermon-card" data-type="friday">
-				<div class="sermon-thumb">
-					<div class="sermon-thumb-icon">▶</div>
-				</div>
-				<div class="sermon-info">
-					<div class="sermon-date">2026년 6월 6일</div>
-					<div class="sermon-title">선한 목자의 음성</div>
-					<div class="sermon-verse">요한복음 10:1–10</div>
-					<div class="sermon-pastor">담임목사 · 금요철야기도회</div>
-				</div>
-			</a>
-
-			<!-- Sermon Card 6 -->
-			<a href="#" class="sermon-card" data-type="sunday">
-				<div class="sermon-thumb">
-					<div class="sermon-thumb-icon">▶</div>
-				</div>
-				<div class="sermon-info">
-					<div class="sermon-date">2026년 5월 24일</div>
-					<div class="sermon-title">감사로 드리는 예배</div>
-					<div class="sermon-verse">시편 100:1–5</div>
-					<div class="sermon-pastor">담임목사 · 주일 1·2부 예배</div>
+					<div class="sermon-date">2026년 6월 17일</div>
+					<div class="sermon-title">낙심하지 말고 선을 행합시다</div>
+					<div class="sermon-verse">갈라디아서 6장 8절 ~ 10절</div>
+					<div class="sermon-pastor">담임목사 손정열 · 주일예배</div>
 				</div>
 			</a>
 		</div>
@@ -240,6 +180,27 @@
 					card.style.display = 'none';
 				}
 			});
+		});
+	});
+
+	// Video player in thumbnail functionality
+	const videoCards = document.querySelectorAll('.sermon-card-video');
+
+	videoCards.forEach(card => {
+		const playBtn = card.querySelector('.sermon-thumb-icon');
+		const iframe = card.querySelector('.sermon-thumb-video');
+
+		playBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+
+			const videoId = card.dataset.videoId;
+			const startTime = card.dataset.start || '0';
+			const iframeSrc = `https://www.youtube.com/embed/${videoId}?start=${startTime}&autoplay=1`;
+
+			iframe.src = iframeSrc;
+			iframe.style.display = 'block';
+			playBtn.style.display = 'none';
 		});
 	});
 </script>

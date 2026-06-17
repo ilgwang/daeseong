@@ -3,12 +3,23 @@
    ======================================== */
 
 .location-page-title {
-	color: #fff;
-	padding: 195px 0;
-	text-align: center;
+	width: 100%;
+	background: url(/image/board4.jpg) no-repeat center / 100% 100%;
 	position: relative;
 	overflow: hidden;
-	background: url(/image/board4.jpg) no-repeat center / 100% auto;
+	min-height: 25vh;
+}
+
+.page-title-inner {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 195px 20px;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 1;
+	text-align: center;
+	color: #fff;
 }
 
 .location-page-title::before {
@@ -26,8 +37,6 @@
 	margin-bottom: 15px;
 	font-family: "Noto Sans KR", "Pretendard", sans-serif;
 	letter-spacing: -0.02em;
-	position: relative;
-	z-index: 1;
 }
 
 .location-page-title p {
@@ -36,14 +45,14 @@
 	max-width: 600px;
 	margin: 0 auto;
 	line-height: 1.6;
-	position: relative;
-	z-index: 1;
 }
 
 .location-container {
-	width: 1100px;
+	width: 100%;
+	max-width: 1100px;
 	margin: 0 auto;
 	padding: 60px 20px;
+	box-sizing: border-box;
 }
 
 .location-content {
@@ -178,7 +187,8 @@
 
 @media (max-width: 1024px) {
 	.location-container {
-		width: calc(100% - 40px);
+		width: 100%;
+		padding: 60px 20px;
 	}
 
 	.location-content {
