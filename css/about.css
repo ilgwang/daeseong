@@ -4,11 +4,14 @@
 
 .about-page-title {
 	color: #fff;
-	padding: 153px 0;
 	text-align: center;
 	position: relative;
 	overflow: hidden;
-	background: url(/image/aboutbg.jpg) no-repeat center / 100% auto;
+	background: url(/image/aboutbg.jpg) no-repeat center / 100% 100%;
+	min-height: 25vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .about-page-title::before {

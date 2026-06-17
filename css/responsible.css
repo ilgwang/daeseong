@@ -142,9 +142,5 @@
     .main_banner li{width:50%;}
 }
 @media screen and (max-width:380px){
-   .header_top_item > h1{text-align:center; padding-top:30px; width:100px;}
-   .header_top_item .top_section{position:absolute; left:0; top:0; text-align:center; padding:5px 0; border-bottom:1px solid #4e2c64;}
-   .header_top_item .top_section li{float:none; display:inline-block; font-size:11px;}
-
     .main_banner li{width:100%;}
 }

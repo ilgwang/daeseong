@@ -259,6 +259,148 @@
 	}
 }
 
+/* SNS Login Modal */
+.sns-modal {
+	display: none;
+	position: fixed;
+	z-index: 10000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	align-items: center;
+	justify-content: center;
+}
+
+.sns-modal.active {
+	display: flex;
+}
+
+.sns-modal-content {
+	background: #fff;
+	border-radius: 12px;
+	padding: 40px 30px;
+	width: 90%;
+	max-width: 400px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+	position: relative;
+}
+
+.sns-modal-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	background: none;
+	border: none;
+	font-size: 28px;
+	cursor: pointer;
+	color: #999;
+	transition: color 0.3s;
+}
+
+.sns-modal-close:hover {
+	color: #333;
+}
+
+.sns-modal-content h2 {
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 20px;
+	color: #333;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.sns-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sns-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 14px 16px;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 15px;
+	transition: all 0.3s ease;
+	color: #fff;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.kakao-btn {
+	background: #FFE812;
+	color: #000;
+}
+
+.kakao-btn:hover {
+	background: #FFCF00;
+}
+
+.naver-btn {
+	background: #00C73C;
+	color: #fff;
+}
+
+.naver-btn:hover {
+	background: #00B030;
+}
+
+.google-btn {
+	background: #4285F4;
+	color: #fff;
+}
+
+.google-btn:hover {
+	background: #3367D6;
+}
+
+.admin-login-divider {
+	text-align: center;
+	color: #ccc;
+	margin: 20px 0 15px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.admin-login-link {
+	display: block;
+	text-align: center;
+	padding: 12px 16px;
+	color: #2d5f8d;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 600;
+	border: 2px solid #2d5f8d;
+	border-radius: 8px;
+	transition: all 0.3s ease;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.admin-login-link:hover {
+	background: #2d5f8d;
+	color: #fff;
+}
+
+@media (max-width: 768px) {
+	.sns-modal-content {
+		width: 85%;
+		padding: 30px 20px;
+	}
+
+	.sns-modal-content h2 {
+		font-size: 18px;
+	}
+
+	.sns-btn {
+		padding: 12px 14px;
+		font-size: 14px;
+	}
+}
+
 @media (max-width: 768px) {
 	.sermon-page-title h1 {
 		font-size: 32px;

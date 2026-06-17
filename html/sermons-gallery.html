@@ -70,7 +70,7 @@
 			</script>
 			<div class="header_top_item">
 				<ul class="top_section" style="right: -10px;">
-						<li><a href="/member/login.jsp">로그인</a></li>
+						<li><a href="#" class="login-btn">로그인</a></li>
 			    </ul>
 				<h1><a href="/html/index.html"><img src="/image/index_logo_daeseong.png?ver=2004271104" alt="대성교회" /></a></h1>
 				<div id="m_nav"></div>
@@ -144,6 +144,27 @@
 		</div>
 	</div>
 
+	<!-- SNS Login Modal -->
+	<div id="sns-login-modal" class="sns-modal">
+		<div class="sns-modal-content">
+			<button class="sns-modal-close">&times;</button>
+			<h2>SNS로 로그인</h2>
+			<div class="sns-buttons">
+				<a href="#" class="sns-btn kakao-btn">
+					<span>카카오톡으로 로그인</span>
+				</a>
+				<a href="#" class="sns-btn naver-btn">
+					<span>네이버로 로그인</span>
+				</a>
+				<a href="#" class="sns-btn google-btn">
+					<span>Google로 로그인</span>
+				</a>
+			</div>
+			<div class="admin-login-divider">또는</div>
+			<a href="/admin/login" class="admin-login-link">관리자 로그인</a>
+		</div>
+	</div>
+
 	<!-- Footer -->
 	<footer>
 		<div class="inner_footer">
@@ -165,6 +186,32 @@
 </div>
 
 <script>
+	// SNS Login Modal
+	const snsModal = document.getElementById('sns-login-modal');
+	const loginBtn = document.querySelector('.login-btn');
+	const closeBtn = document.querySelector('.sns-modal-close');
+
+	loginBtn.addEventListener('click', function(e) {
+		e.preventDefault();
+		snsModal.classList.add('active');
+	});
+
+	closeBtn.addEventListener('click', function() {
+		snsModal.classList.remove('active');
+	});
+
+	snsModal.addEventListener('click', function(e) {
+		if (e.target === snsModal) {
+			snsModal.classList.remove('active');
+		}
+	});
+
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape' && snsModal.classList.contains('active')) {
+			snsModal.classList.remove('active');
+		}
+	});
+
 	// Filter functionality
 	document.querySelectorAll('.sermon-filter-btn').forEach(btn => {
 		btn.addEventListener('click', function() {

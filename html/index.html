@@ -164,7 +164,7 @@ $(document).ready(function(){
 });
 //-->
 </script>
-<body>
+<body data-page="home">
 <div id="wrap">
     <!-- main_section -->
     <div id="vis_sec" class="vis_sec_bg">
@@ -186,8 +186,7 @@ $(document).ready(function(){
 
         <div class="header_top_item">
 			<ul class="top_section" style="right: -10px;">
-				<li><a href="/member/login.jsp">로그인</a></li>
-				<li><a href="/member/member_linker.jsp?slinker=/member/compose.do" class="popdown">회원가입</a></li>
+				<li><a href="#" class="login-btn">로그인</a></li>
 		  	</ul>
 
 			<h1><a href="/html/index.html"><img src="/image/index_logo_daeseong.png?ver=2004271104" alt="대성교회" /></a></h1>
@@ -196,28 +195,26 @@ $(document).ready(function(){
 			<div id="m_nav"></div>
 			<!--// m_nav -->
 
-			<div class="header_gnb" >
-				<div class="main_nav" style="right: 28px;">
-					<!-- nav -->
-					<nav class="nav">
+			<div class="header_gnb">
+				<div class="main_nav">
+					<nav>
 						<ul class="sf-menu" id="menu">
 							<li><a href="/html/about.html">교회소개</a>
 								<ul class="menu_hidden">
 									<li><a href="/html/about.html">교회소개</a></li>
 								</ul>
 							</li>
-							<li><a href="/html/sermons-gallery.html">설교영상</a></li>
+							<li><a href="/html/sermons-gallery.html">설교영상</a>
+							</li>
 							<li><a href="/html/news.html">커뮤니티</a>
 							</li>
 							<li><a href="/html/location.html">오시는길</a>
 							</li>
 						</ul>
 					</nav>
-					<!-- //nav -->
 				</div>
-				<!-- //main_nav -->
 			</div>
-		
+
     </header>
 		<!-- //header -->
 		<!-- visual -->
@@ -310,5 +307,57 @@ $(document).ready(function(){
 	});
 </script>
 <!-- Slider-->
+	<script src="/js/church-nav.js"></script>
+
+	<!-- SNS Login Modal -->
+	<div id="sns-login-modal" class="sns-modal">
+		<div class="sns-modal-content">
+			<button class="sns-modal-close">&times;</button>
+			<h2>SNS로 로그인</h2>
+			<div class="sns-buttons">
+				<a href="#" class="sns-btn kakao-btn">
+					<span>카카오톡으로 로그인</span>
+				</a>
+				<a href="#" class="sns-btn naver-btn">
+					<span>네이버로 로그인</span>
+				</a>
+				<a href="#" class="sns-btn google-btn">
+					<span>Google로 로그인</span>
+				</a>
+			</div>
+			<div class="admin-login-divider">또는</div>
+			<a href="/admin/login" class="admin-login-link">관리자 로그인</a>
+		</div>
+	</div>
+
+	<script>
+		// SNS Login Modal
+		const snsModal = document.getElementById('sns-login-modal');
+		const loginBtn = document.querySelector('.login-btn');
+		const closeBtn = document.querySelector('.sns-modal-close');
+
+		if (loginBtn) {
+			loginBtn.addEventListener('click', function(e) {
+				e.preventDefault();
+				snsModal.classList.add('active');
+			});
+		}
+
+		closeBtn.addEventListener('click', function() {
+			snsModal.classList.remove('active');
+		});
+
+		snsModal.addEventListener('click', function(e) {
+			if (e.target === snsModal) {
+				snsModal.classList.remove('active');
+			}
+		});
+
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape' && snsModal.classList.contains('active')) {
+				snsModal.classList.remove('active');
+			}
+		});
+	</script>
 </body>
 </html>
