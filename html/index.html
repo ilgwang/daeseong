@@ -36,6 +36,7 @@
 <script src="/css/jquery.slicknav.js"></script>
 <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <script src="/inc/modernizr-2.6.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/sns-modal.css">
 </head>
 <!-- <script language="javascript"> -->
 <script type="text/javascript">
@@ -56,7 +57,7 @@
 		<header id="header">
 			<div class="header_top_item">
 				<ul class="top_section" style="right: -5px;top:23px">
-					<li><a href="/member/login.jsp">로그인</a></li>
+					<li><a href="#" class="login-btn">로그인</a></li>
 				</ul>
 				<h1>
 					<a href="/html/index.html" style="position: relative;top:4px;">
@@ -182,13 +183,13 @@
 			<button class="sns-modal-close">&times;</button>
 			<h2>SNS로 로그인</h2>
 			<div class="sns-buttons">
-				<a href="#" class="sns-btn kakao-btn">
+				<a href="javascript:void(0);" class="sns-btn kakao-btn">
 					<span>카카오톡으로 로그인</span>
 				</a>
-				<a href="#" class="sns-btn naver-btn">
+				<a href="javascript:void(0);" class="sns-btn naver-btn">
 					<span>네이버로 로그인</span>
 				</a>
-				<a href="#" class="sns-btn google-btn">
+				<a href="javascript:void(0);" class="sns-btn google-btn">
 					<span>Google로 로그인</span>
 				</a>
 			</div>
@@ -203,6 +204,13 @@
 		const loginBtn = document.querySelector('.login-btn');
 		const closeBtn = document.querySelector('.sns-modal-close');
 
+		// SNS 버튼 클릭 방지
+		document.querySelectorAll('.sns-btn').forEach(btn => {
+			btn.addEventListener('click', function(e) {
+				e.preventDefault();
+			});
+		});
+
 		if (loginBtn) {
 			loginBtn.addEventListener('click', function(e) {
 				e.preventDefault();
@@ -210,9 +218,11 @@
 			});
 		}
 
-		closeBtn.addEventListener('click', function() {
-			snsModal.classList.remove('active');
-		});
+		if(closeBtn) {
+			closeBtn.addEventListener('click', function() {
+				snsModal.classList.remove('active');
+			});
+		}
 
 		snsModal.addEventListener('click', function(e) {
 			if (e.target === snsModal) {

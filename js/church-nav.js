@@ -89,13 +89,18 @@
 
   // header shadow
   var header = document.querySelector('header.site');
-  window.addEventListener('scroll', function(){ header.classList.toggle('scrolled', window.scrollY>10); });
+  if(header){
+    window.addEventListener('scroll', function(){ header.classList.toggle('scrolled', window.scrollY>10); });
+  }
 
   // mobile menu
   var mm = document.querySelector('.mobile-menu');
-  document.querySelector('.burger').addEventListener('click', function(){ mm.classList.add('open'); });
-  mm.querySelector('.scrim').addEventListener('click', function(){ mm.classList.remove('open'); });
-  mm.querySelector('.mclose button').addEventListener('click', function(){ mm.classList.remove('open'); });
+  var burger = document.querySelector('.burger');
+  if(mm && burger){
+    burger.addEventListener('click', function(){ mm.classList.add('open'); });
+    mm.querySelector('.scrim').addEventListener('click', function(){ mm.classList.remove('open'); });
+    mm.querySelector('.mclose button').addEventListener('click', function(){ mm.classList.remove('open'); });
+  }
 
   // reveal
   var io = new IntersectionObserver(function(entries){
