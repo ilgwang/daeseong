@@ -90,7 +90,7 @@
 	ul.favorite li{float:left;margin-left:10px;}
 
 	ul.info_menu{float:left;padding:0;width:100%;}
-	ul.info_menu li{float:left;padding-left:15px;background:url(/image/info_bar.gif) no-repeat 5px 3px;}
+	ul.info_menu li{float:left;padding-left:15px;background:url(../image/info_bar.gif) no-repeat 5px 3px;}
 	ul.info_menu li.info_bar{background-image:none;}
 	ul.info_menu li a{font-weight:bold;color:#c8d0e4;}
 	ul.info_menu li a:hover{color:#fff;}

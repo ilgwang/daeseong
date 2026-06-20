@@ -1,5 +1,5 @@
 #header {
-	background: url('/image/vis_bg.jpg') no-repeat center/cover !important;
+	background: url('../image/vis_bg.jpg') no-repeat center/cover !important;
 	background-attachment: fixed;
 }
 
@@ -27,7 +27,7 @@
 /* Page Title */
 .sermon-page-title {
 	width: 100%;
-	background: url(/image/board2.jpg) no-repeat center / 100% 100%;
+	background: url(../image/board2.jpg) no-repeat center / 100% 100%;
 	position: relative;
 	overflow: hidden;
 	min-height: 32vh;

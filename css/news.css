@@ -1,6 +1,6 @@
 .news-page-title {
 	width: 100%;
-	background: url(/image/board3.jpg) no-repeat center / 100% 100%;
+	background: url(../image/board3.jpg) no-repeat center / 100% 100%;
 	position: relative;
 	overflow: hidden;
 	min-height: 32vh;

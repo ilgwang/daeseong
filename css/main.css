@@ -1,6 +1,6 @@
-@import url('/css/nav.css');
-@import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
-@ import url('http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css');
+@import url('./nav.css');
+@import url('https://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+@import url('https://fonts.googleapis.com/earlyaccess/nanummyeongjo.css');
 
 #wrap{width:100%;}
 .content{width:100%; margin-bottom:30px;}
@@ -11,7 +11,7 @@
 .header_top_item > h1{font-size:0;}
 .header_top_item h1 img{max-width:120px; height:auto;}
 .header_top_item .top_section{position:absolute; right:11px; top:19px;}
-.header_top_item .top_section li{float:left; font-size:14px; letter-spacing:-0.5px;  background:url(/image/top_line.png) no-repeat 100% 50%;}
+.header_top_item .top_section li{float:left; font-size:14px; letter-spacing:-0.5px;  background:url(../image/top_line.png) no-repeat 100% 50%;}
 .header_top_item .top_section li:last-child{background:none;}
 .header_top_item .top_section li a{font-family:"Malgun Gothic"; display:block; opacity:0.65; color:#fff; padding:0 8px;}
 
@@ -25,7 +25,7 @@
 
 /*visual*/
 #vis_sec{width:100%;}
-.vis_sec_bg{background:url(/image/vis_bg.jpg) no-repeat; width:100%; background-size:cover; padding-bottom:56px;}
+.vis_sec_bg{background:url(../image/vis_bg.jpg) no-repeat; width:100%; background-size:cover; padding-bottom:56px;}
 
 #main_vis{
     max-width:1098px; 
