@@ -286,7 +286,7 @@
 /* Pastor Section */
 .pastor-section {
 	margin-bottom: 80px;
-	background: #f5f7fa;
+	background: linear-gradient(135deg, #f0f4f8 0%, #f8f5f0 100%);
 	padding: 60px;
 	border-radius: 12px;
 }
@@ -401,6 +401,13 @@
 /* History Section */
 .history-section {
 	margin-bottom: 80px;
+	background: linear-gradient(135deg, rgba(45, 95, 141, 0.05) 0%, rgba(45, 95, 141, 0.03) 100%);
+	padding: 60px 40px;
+	border-radius: 12px;
+	margin-left: -20px;
+	margin-right: -20px;
+	padding-left: 60px;
+	padding-right: 60px;
 }
 
 .history-section h2 {
@@ -512,6 +519,13 @@
 /* Worship Schedule Section */
 .worship-section {
 	margin-bottom: 80px;
+	background: linear-gradient(135deg, rgba(212, 165, 116, 0.08) 0%, rgba(212, 165, 116, 0.05) 100%);
+	padding: 60px 40px;
+	border-radius: 12px;
+	margin-left: -20px;
+	margin-right: -20px;
+	padding-left: 60px;
+	padding-right: 60px;
 }
 
 .worship-section h2 {
