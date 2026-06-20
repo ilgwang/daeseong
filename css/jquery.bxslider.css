@@ -166,5 +166,86 @@ ul.bxslider {
 }
 
 @media screen and (max-width: 1000px) {
-	.bx-wrapper .bx-pager{bottom:20px;}
+	.bx-wrapper .bx-pager {
+		bottom: 20px;
+	}
+}
+
+@media (max-width: 768px) {
+	.bx-wrapper {
+		margin-bottom: 0;
+	}
+
+	.bx-wrapper img {
+		width: 100%;
+		height: auto;
+	}
+
+	.bx-wrapper .bx-pager {
+		bottom: 15px;
+		font-size: 0.75em;
+	}
+
+	.bx-wrapper .bx-pager.bx-default-pager a {
+		width: 7px;
+		height: 7px;
+		margin: 0 2px;
+	}
+
+	.bx-wrapper .bx-pager.bx-default-pager a:hover,
+	.bx-wrapper .bx-pager.bx-default-pager a.active,
+	.bx-wrapper .bx-pager.bx-default-pager a:focus {
+		width: 18px;
+	}
+
+	.bx-wrapper .bx-controls-direction a {
+		width: 44px;
+		height: 44px;
+		margin-top: -22px;
+	}
+
+	.bx-wrapper .bx-prev {
+		left: 5px;
+		background-size: 44px;
+	}
+
+	.bx-wrapper .bx-next {
+		right: 5px;
+		background-size: 44px;
+	}
+}
+
+@media (max-width: 480px) {
+	.bx-wrapper .bx-pager {
+		bottom: 10px;
+		font-size: 0.7em;
+	}
+
+	.bx-wrapper .bx-pager.bx-default-pager a {
+		width: 6px;
+		height: 6px;
+		margin: 0 2px;
+	}
+
+	.bx-wrapper .bx-pager.bx-default-pager a:hover,
+	.bx-wrapper .bx-pager.bx-default-pager a.active,
+	.bx-wrapper .bx-pager.bx-default-pager a:focus {
+		width: 14px;
+	}
+
+	.bx-wrapper .bx-controls-direction a {
+		width: 36px;
+		height: 36px;
+		margin-top: -18px;
+	}
+
+	.bx-wrapper .bx-prev {
+		left: 3px;
+		background-size: 36px;
+	}
+
+	.bx-wrapper .bx-next {
+		right: 3px;
+		background-size: 36px;
+	}
 }

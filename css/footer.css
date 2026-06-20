@@ -59,19 +59,80 @@ footer {
 @media (max-width: 1024px) {
 	.inner_footer {
 		width: calc(100% - 40px);
+		padding: 25px 20px;
 	}
 }
 
 @media (max-width: 768px) {
+	footer {
+		background: linear-gradient(135deg, #1a2a3a 0%, #0f1a26 100%);
+		border-top: 3px solid #d4a574;
+		padding: 0;
+	}
+
 	.inner_footer {
+		width: calc(100% - 30px);
+		margin: 0 15px;
+		padding: 20px 0;
 		grid-template-columns: 1fr;
-		gap: 20px;
+		gap: 15px;
+		text-align: center;
+	}
+
+	.inner_footer > p {
+		margin: 0;
+		text-align: center;
+	}
+
+	.inner_footer > p img {
+		max-height: 100px;
+		margin-right: 0;
+		margin-bottom: 10px;
+	}
+
+	.inner_footer > address {
+		padding: 0;
+		margin: 0;
+	}
+
+	.inner_footer > address p {
+		margin: 6px 0;
+	}
+
+	.inner_footer > address p a {
+		display: inline-block;
+		padding: 8px 12px;
+		font-size: 11px;
+		line-height: 1.4;
 	}
 }
 
 @media (max-width: 480px) {
+	footer {
+		padding: 0;
+	}
+
 	.inner_footer {
-		width: calc(100% - 32px);
-		font-size: 12px;
+		width: calc(100% - 20px);
+		margin: 0 10px;
+		padding: 15px 0;
+		font-size: 11px;
+		line-height: 1.6;
+	}
+
+	.inner_footer > p img {
+		max-height: 80px;
+		margin-bottom: 8px;
+	}
+
+	.inner_footer > address p {
+		margin: 5px 0;
+	}
+
+	.inner_footer > address p a {
+		display: block;
+		padding: 6px 8px;
+		font-size: 10px;
+		margin-bottom: 4px;
 	}
 }

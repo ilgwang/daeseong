@@ -194,23 +194,186 @@
 }
 
 @media (max-width: 768px) {
+	.header_gnb {
+		display: none !important;
+	}
+
+	.location-page-title {
+		min-height: 25vh;
+	}
+
 	.location-page-title h1 {
 		font-size: 32px;
+		margin-bottom: 10px;
 	}
 
 	.location-page-title p {
 		font-size: 16px;
 	}
 
+	.page-title-inner {
+		padding: 100px 20px;
+	}
+
 	.location-container {
 		padding: 40px 16px;
+		width: calc(100% - 32px);
+	}
+
+	.location-content {
+		grid-template-columns: 1fr;
+		gap: 25px;
 	}
 
 	.location-info {
-		padding: 30px;
+		padding: 25px;
+	}
+
+	.location-info h2 {
+		font-size: 22px;
+		margin-bottom: 20px;
+	}
+
+	.info-item {
+		padding-bottom: 15px;
+	}
+
+	.info-label {
+		font-size: 12px;
+		margin-bottom: 6px;
+	}
+
+	.info-text {
+		font-size: 15px;
+		line-height: 1.6;
+	}
+
+	.location-map {
+		min-height: 250px;
+		margin-bottom: 25px;
+	}
+
+	.map-placeholder svg {
+		width: 60px;
+		height: 60px;
+		margin-bottom: 12px;
+	}
+
+	.map-placeholder p {
+		font-size: 13px;
 	}
 
 	.directions-section {
 		padding: 30px;
+		margin-bottom: 30px;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.directions-section h2 {
+		font-size: 22px;
+		margin-bottom: 20px;
+	}
+
+	.direction-item {
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+	}
+
+	.direction-title {
+		font-size: 15px;
+		margin-bottom: 10px;
+	}
+
+	.direction-description {
+		font-size: 13px;
+		line-height: 1.6;
+	}
+}
+
+@media (max-width: 480px) {
+	.location-page-title {
+		min-height: 20vh;
+	}
+
+	.location-page-title h1 {
+		font-size: 24px;
+		margin-bottom: 8px;
+	}
+
+	.location-page-title p {
+		font-size: 14px;
+	}
+
+	.page-title-inner {
+		padding: 60px 15px;
+	}
+
+	.location-container {
+		padding: 30px 12px;
+		width: calc(100% - 24px);
+	}
+
+	.location-info {
+		padding: 20px;
+	}
+
+	.location-info h2 {
+		font-size: 20px;
+		margin-bottom: 15px;
+	}
+
+	.info-item {
+		padding-bottom: 12px;
+	}
+
+	.info-label {
+		font-size: 11px;
+		margin-bottom: 5px;
+	}
+
+	.info-text {
+		font-size: 14px;
+		line-height: 1.5;
+	}
+
+	.location-map {
+		min-height: 200px;
+		margin-bottom: 20px;
+	}
+
+	.map-placeholder svg {
+		width: 50px;
+		height: 50px;
+		margin-bottom: 10px;
+	}
+
+	.map-placeholder p {
+		font-size: 12px;
+	}
+
+	.directions-section {
+		padding: 25px;
+		margin-bottom: 20px;
+	}
+
+	.directions-section h2 {
+		font-size: 20px;
+		margin-bottom: 15px;
+	}
+
+	.direction-item {
+		margin-bottom: 15px;
+		padding-bottom: 15px;
+	}
+
+	.direction-title {
+		font-size: 14px;
+		margin-bottom: 8px;
+	}
+
+	.direction-description {
+		font-size: 12px;
+		line-height: 1.5;
 	}
 }
