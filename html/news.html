@@ -105,6 +105,11 @@
 
 	<!-- Main Content -->
 	<div class="news-container">
+		<!-- Register Button -->
+		<div class="news-register-section">
+			<button class="news-register-btn" id="news-register-open">+ 커뮤니티 글 등록</button>
+		</div>
+
 		<!-- Filters -->
 		<div class="news-filters">
 			<button class="news-filter-btn active" data-filter="gospel">복음통일</button>
@@ -409,6 +414,48 @@
 		</div>
 	</div>
 
+	<!-- News Register Modal -->
+	<div id="news-register-modal" class="news-modal">
+		<div class="news-modal-content">
+			<button class="news-modal-close">&times;</button>
+			<h2>커뮤니티 글 등록</h2>
+			<form id="news-register-form">
+				<div class="form-group">
+					<label for="news-title">제목</label>
+					<input type="text" id="news-title" name="title" placeholder="글 제목을 입력하세요" required>
+				</div>
+				<div class="form-group">
+					<label for="news-category">카테고리</label>
+					<select id="news-category" name="category" required>
+						<option value="">선택</option>
+						<option value="gospel">복음통일</option>
+						<option value="news">교회소식</option>
+						<option value="bulletin">주보</option>
+						<option value="poetry">시집</option>
+						<option value="column">칼럼</option>
+						<option value="study">Bible Study</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="news-author">작성자</label>
+					<input type="text" id="news-author" name="author" placeholder="이름을 입력하세요">
+				</div>
+				<div class="form-group">
+					<label for="news-content">내용</label>
+					<textarea id="news-content" name="content" placeholder="글 내용을 입력하세요" rows="8" required></textarea>
+				</div>
+				<div class="form-group">
+					<label for="news-image">이미지 (선택)</label>
+					<input type="file" id="news-image" name="image" accept="image/*">
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn-submit">등록</button>
+					<button type="button" class="btn-cancel">취소</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
 	<!-- Footer -->
 	<footer>
 		<div class="inner_footer">
@@ -430,6 +477,64 @@
 </div>
 
 <script>
+	// News Register Modal
+	const newsModal = document.getElementById('news-register-modal');
+	const newsRegisterBtn = document.getElementById('news-register-open');
+	const newsCloseBtn = document.querySelector('.news-modal-close');
+	const newsCancelBtn = document.querySelector('.btn-cancel');
+	const newsForm = document.getElementById('news-register-form');
+
+	if (newsRegisterBtn) {
+		newsRegisterBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			newsModal.classList.add('active');
+		});
+	}
+
+	if (newsCloseBtn) {
+		newsCloseBtn.addEventListener('click', function() {
+			newsModal.classList.remove('active');
+		});
+	}
+
+	if (newsCancelBtn) {
+		newsCancelBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			newsModal.classList.remove('active');
+			newsForm.reset();
+		});
+	}
+
+	newsModal.addEventListener('click', function(e) {
+		if (e.target === newsModal) {
+			newsModal.classList.remove('active');
+			newsForm.reset();
+		}
+	});
+
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape' && newsModal.classList.contains('active')) {
+			newsModal.classList.remove('active');
+			newsForm.reset();
+		}
+	});
+
+	newsForm.addEventListener('submit', function(e) {
+		e.preventDefault();
+		const formData = {
+			title: document.getElementById('news-title').value,
+			category: document.getElementById('news-category').value,
+			author: document.getElementById('news-author').value,
+			content: document.getElementById('news-content').value,
+			image: document.getElementById('news-image').files[0]?.name || null
+		};
+
+		console.log('뉴스 등록 데이터:', formData);
+		alert('글이 등록되었습니다.');
+		newsModal.classList.remove('active');
+		newsForm.reset();
+	});
+
 	// 이미지 슬라이더 함수
 	function changeSlide(direction, button) {
 		const container = button.closest('.image-slider-container');
