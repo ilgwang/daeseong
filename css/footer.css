@@ -1,0 +1,79 @@
+/* ========== FOOTER ========== */
+footer {
+	background: linear-gradient(135deg, #1a2a3a 0%, #0f1a26 100%);
+	color: #999;
+	border-top: 4px solid #d4a574;
+}
+
+.inner_footer {
+	width: 1100px;
+	margin: 0 auto;
+	color: #aaa;
+	font-size: 13px;
+	line-height: 1.8;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: start;
+}
+
+.inner_footer > p {
+	margin: 0;
+	text-align: center;
+}
+
+.inner_footer > p img {
+	max-height: 120px;
+	width: auto;
+	margin-right: 50px;
+}
+
+.inner_footer > address {
+	padding: 0;
+	margin: 0;
+	font-style: normal;
+}
+
+.inner_footer > address p {
+	margin: 8px 0;
+}
+
+.inner_footer > address p a {
+	display: inline-block;
+	padding: 8px 16px;
+	background: rgba(255, 255, 255, 0.05);
+	color: #ccc;
+	font-size: 12px;
+	border-radius: 6px;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	font-family: "Pretendard", sans-serif;
+	font-weight: 500;
+}
+
+.inner_footer > address p a:hover {
+	background: #d4a574;
+	color: #fff;
+	border-color: #d4a574;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+	.inner_footer {
+		width: calc(100% - 40px);
+	}
+}
+
+@media (max-width: 768px) {
+	.inner_footer {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+}
+
+@media (max-width: 480px) {
+	.inner_footer {
+		width: calc(100% - 32px);
+		font-size: 12px;
+	}
+}
