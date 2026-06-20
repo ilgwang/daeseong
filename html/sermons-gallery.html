@@ -104,6 +104,11 @@
 
 	<!-- Main Content -->
 	<div class="sermon-container">
+		<!-- Register Button -->
+		<div class="sermon-register-section">
+			<button class="sermon-register-btn" id="sermon-register-open">+ 설교영상 등록</button>
+		</div>
+
 		<!-- Filters -->
 		<div class="sermon-filters">
 			<button class="sermon-filter-btn active" data-filter="all">전체</button>
@@ -142,6 +147,51 @@
 			<button class="pagination-btn">3</button>
 			<button class="pagination-btn">4</button>
 			<button class="pagination-btn">&gt;</button>
+		</div>
+	</div>
+
+	<!-- Sermon Register Modal -->
+	<div id="sermon-register-modal" class="sermon-modal">
+		<div class="sermon-modal-content">
+			<button class="sermon-modal-close">&times;</button>
+			<h2>설교영상 등록</h2>
+			<form id="sermon-register-form">
+				<div class="form-group">
+					<label for="sermon-title">제목</label>
+					<input type="text" id="sermon-title" name="title" placeholder="설교 제목을 입력하세요" required>
+				</div>
+				<div class="form-row">
+					<div class="form-group">
+						<label for="sermon-pastor">설교자</label>
+						<input type="text" id="sermon-pastor" name="pastor" placeholder="설교자 이름" required>
+					</div>
+					<div class="form-group">
+						<label for="sermon-type">설교 타입</label>
+						<select id="sermon-type" name="type" required>
+							<option value="">선택</option>
+							<option value="sunday">주일예배</option>
+							<option value="wednesday">수요기도회</option>
+							<option value="friday">복음통일기도회</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="sermon-verse">성경 구절</label>
+					<input type="text" id="sermon-verse" name="verse" placeholder="예) 요한복음 3장 16절" required>
+				</div>
+				<div class="form-group">
+					<label for="sermon-date">날짜</label>
+					<input type="date" id="sermon-date" name="date" required>
+				</div>
+				<div class="form-group">
+					<label for="sermon-url">YouTube URL</label>
+					<input type="url" id="sermon-url" name="url" placeholder="https://www.youtube.com/watch?v=..." required>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn-submit">등록</button>
+					<button type="button" class="btn-cancel">취소</button>
+				</div>
+			</form>
 		</div>
 	</div>
 
@@ -187,6 +237,65 @@
 </div>
 
 <script>
+	// Sermon Register Modal
+	const sermonModal = document.getElementById('sermon-register-modal');
+	const sermonRegisterBtn = document.getElementById('sermon-register-open');
+	const sermonCloseBtn = document.querySelector('.sermon-modal-close');
+	const sermonCancelBtn = document.querySelector('.btn-cancel');
+	const sermonForm = document.getElementById('sermon-register-form');
+
+	if (sermonRegisterBtn) {
+		sermonRegisterBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			sermonModal.classList.add('active');
+		});
+	}
+
+	if (sermonCloseBtn) {
+		sermonCloseBtn.addEventListener('click', function() {
+			sermonModal.classList.remove('active');
+		});
+	}
+
+	if (sermonCancelBtn) {
+		sermonCancelBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			sermonModal.classList.remove('active');
+			sermonForm.reset();
+		});
+	}
+
+	sermonModal.addEventListener('click', function(e) {
+		if (e.target === sermonModal) {
+			sermonModal.classList.remove('active');
+			sermonForm.reset();
+		}
+	});
+
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape' && sermonModal.classList.contains('active')) {
+			sermonModal.classList.remove('active');
+			sermonForm.reset();
+		}
+	});
+
+	sermonForm.addEventListener('submit', function(e) {
+		e.preventDefault();
+		const formData = {
+			title: document.getElementById('sermon-title').value,
+			pastor: document.getElementById('sermon-pastor').value,
+			verse: document.getElementById('sermon-verse').value,
+			type: document.getElementById('sermon-type').value,
+			date: document.getElementById('sermon-date').value,
+			url: document.getElementById('sermon-url').value
+		};
+
+		console.log('설교 등록 데이터:', formData);
+		alert('설교영상이 등록되었습니다.');
+		sermonModal.classList.remove('active');
+		sermonForm.reset();
+	});
+
 	// SNS Login Modal
 	const snsModal = document.getElementById('sns-login-modal');
 	const loginBtn = document.querySelector('.login-btn');
