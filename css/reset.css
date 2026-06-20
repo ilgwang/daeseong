@@ -10,7 +10,6 @@
 	font-style:normal;
 }
 
-/* Reset */
 html,body{width:100%;height:100%}
 html{overflow-y:scroll}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,form,fieldset,p,button{margin:0;padding:0}
@@ -27,7 +26,6 @@ hr{display:none}
 legend{width:0}
 
 
-/* ============================================ */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -47,7 +45,6 @@ time, mark, audio, video {
 	font: normal;
 }
 
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -56,4 +53,3 @@ footer, header, hgroup, menu, nav, section {
 a {
 	text-decoration:none;
 }
-/* ============================================ */

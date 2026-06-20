@@ -1,18 +1,14 @@
-/*Mobile Menu Core Style*/
 .slicknav_btn { position: relative; display: block; vertical-align: middle; float: right; padding: 0; line-height: 1.125em; cursor: pointer; }
 .slicknav_menu  .slicknav_menutxt { display: block; line-height: 1.188em; float: left; }
 .slicknav_menu .slicknav_icon { float: left; margin:0;/* 0.188em 0 0 0.438em;*/ }
 .slicknav_menu .slicknav_no-text { margin: 0 }
 .slicknav_menu .slicknav_icon-bar { display: block; width: 30px; height: 2px;
-/*-webkit-border-radius: 1px; -moz-border-radius: 1px; border-radius: 1px;
--webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); */
 }
 .slicknav_btn .slicknav_icon-bar + .slicknav_icon-bar { margin-top:6px; }
 .slicknav_nav { clear: both }
 .slicknav_nav ul,
 .slicknav_nav li { display: block;  }
 .slicknav_nav li{border-bottom:1px solid #ddd;}
-/*.slicknav_nav li:last-child{border-bottom:0;}*/
 .slicknav_nav li ul{border:0;}
 .slicknav_nav li ul li{border-bottom:0;}
 .slicknav_nav li ul li a{padding:10px 25px; font-size:13px;}
@@ -26,11 +22,6 @@
 /* IE6/7 support */
 .slicknav_menu { *zoom: 1 }
 
-/*
-    User Default Style
-    Change the following styles to modify the appearance of the menu.
-*/
-
 .slicknav_menu {font-size:16px; position:relative; width:100%; position: absolute; top:48px; line-height: normal;}
 @media screen and (max-width:380px){
 	.slicknav_menu {top:60px;}
@@ -38,26 +29,22 @@
 
 
 
-/* Button */
-.slicknav_btn {/*margin:15px 20px;*/ text-decoration:none;
+.slicknav_btn {text-decoration:none;
 	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	margin-right:0;
 }
-/* Button Text */
 .slicknav_menu  .slicknav_menutxt {
 	color: #FFF;
 	font-weight: bold;
 	text-shadow: 0 1px 3px #000;
 	display:none;
 }
-/* Button Lines */
 .slicknav_menu .slicknav_icon-bar {background-color: #fff;}
 .slicknav_menu {
 	z-index:199;
-	/*background:#444;*/
 }
 .slicknav_nav {
 	position: relative;
@@ -92,6 +79,5 @@
 }
 .slicknav_nav .slicknav_txtnode { margin-left:15px;}
 
-/*더보기 + 버튼*/
 .slicknav_nav li > a{position:relative;}
 .slicknav_nav .slicknav_arrow {display: inline-block; position: absolute; right: 13px;  top:50%; margin-top:-4px; font-size: 15px; height: 9px; line-height: 7px; opacity:0.6;}

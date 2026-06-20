@@ -24,7 +24,6 @@
 	gap: 12px !important;
 }
 
-/* Page Title */
 .sermon-page-title {
 	width: 100%;
 	background: url(../image/board2.jpg) no-repeat center / 100% 100%;
@@ -70,7 +69,6 @@
 	line-height: 1.6;
 }
 
-/* Main Container */
 .sermon-container {
 	width: 100%;
 	max-width: 1100px;
@@ -259,7 +257,6 @@
 	}
 }
 
-/* Register Section */
 .sermon-register-section {
 	display: flex;
 	justify-content: center;
@@ -285,7 +282,6 @@
 	box-shadow: 0 4px 12px rgba(54, 8, 78, 0.3);
 }
 
-/* Sermon Register Modal */
 .sermon-modal {
 	display: none;
 	position: fixed;
@@ -423,7 +419,6 @@
 	background: #e0e0e0;
 }
 
-/* SNS Login Modal */
 .sns-modal {
 	display: none;
 	position: fixed;

@@ -47,7 +47,6 @@
 	z-index: 1;
 }
 
-/* Register Section */
 .news-register-section {
 	display: flex;
 	justify-content: center;
@@ -73,7 +72,6 @@
 	box-shadow: 0 4px 12px rgba(54, 8, 78, 0.3);
 }
 
-/* News Register Modal */
 .news-modal {
 	display: none;
 	position: fixed;
@@ -380,7 +378,6 @@
 	}
 }
 
-/* Accordion Styles */
 .news-list {
 	display: block !important;
 }
@@ -454,7 +451,6 @@
 	display: block;
 }
 
-/* 스크롤바 스타일 */
 .accordion-content::-webkit-scrollbar {
 	width: 8px;
 }
@@ -473,7 +469,6 @@
 	background: #555;
 }
 
-/* 이미지 슬라이더 스타일 */
 .image-slider-container {
 	position: relative;
 	width: 100%;
@@ -567,7 +562,6 @@
 	background: rgba(255, 255, 255, 0.9);
 }
 
-/* 시 텍스트 스타일 */
 .poem-text {
 	white-space: pre-wrap !important;
 	word-wrap: break-word;

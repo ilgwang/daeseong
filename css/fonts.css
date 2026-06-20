@@ -1,10 +1,3 @@
-/* ===========================================================
-   대성교회 — 웹폰트 @font-face (fonts.css)
-   CDN(woff2)에서 직접 불러옵니다. 폰트 파일을 프로젝트에
-   업로드하면 src의 url(...)을 로컬 경로로 교체하세요.
-   =========================================================== */
-
-/* ---- Pretendard (본문/UI) ---- */
 @font-face{
   font-family:"Pretendard";font-style:normal;font-weight:400;font-display:swap;
   src:url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Regular.woff2") format("woff2");
@@ -21,8 +14,6 @@
   font-family:"Pretendard";font-style:normal;font-weight:700;font-display:swap;
   src:url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Bold.woff2") format("woff2");
 }
-
-/* ---- Noto Serif KR (제목/디스플레이) ---- */
 @font-face{
   font-family:"Noto Serif KR";font-style:normal;font-weight:400;font-display:swap;
   src:url("https://cdn.jsdelivr.net/fontsource/fonts/noto-serif-kr@latest/korean-400-normal.woff2") format("woff2");
