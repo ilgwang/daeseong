@@ -30,7 +30,7 @@
 	background: url(/image/board2.jpg) no-repeat center / 100% 100%;
 	position: relative;
 	overflow: hidden;
-	min-height: 25vh;
+	min-height: 32vh;
 }
 
 .sermon-page-title::before {
