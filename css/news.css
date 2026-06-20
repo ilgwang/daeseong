@@ -56,7 +56,7 @@
 
 .news-register-btn {
 	padding: 14px 32px;
-	background: #2d5f8d;
+	background: #36084e;
 	color: #fff;
 	border: none;
 	border-radius: 8px;
@@ -68,9 +68,9 @@
 }
 
 .news-register-btn:hover {
-	background: #1e3f5a;
+	background: #250B40;
 	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(45, 95, 141, 0.3);
+	box-shadow: 0 4px 12px rgba(54, 8, 78, 0.3);
 }
 
 /* News Register Modal */
@@ -201,12 +201,12 @@
 }
 
 .btn-submit {
-	background: #2d5f8d;
+	background: #36084e;
 	color: #fff;
 }
 
 .btn-submit:hover {
-	background: #1e3f5a;
+	background: #250B40;
 }
 
 .btn-cancel {
@@ -253,9 +253,9 @@
 
 .news-filter-btn:hover,
 .news-filter-btn.active {
-	background: #2d5f8d;
+	background: #36084e;
 	color: #fff;
-	border-color: #2d5f8d;
+	border-color: #36084e;
 }
 
 
@@ -334,9 +334,9 @@
 
 .pagination-btn:hover,
 .pagination-btn.active {
-	background: #2d5f8d;
+	background: #36084e;
 	color: #fff;
-	border-color: #2d5f8d;
+	border-color: #36084e;
 }
 
 @media (max-width: 1024px) {

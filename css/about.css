@@ -352,6 +352,16 @@
 	letter-spacing: 0.05em;
 }
 
+.pastor-info .pastor-location {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #e0e0e0;
+	font-family: "Pretendard", sans-serif;
+	line-height: 1.6;
+}
+
 .pastor-details p {
 	font-size: 15px;
 	color: #2d5f8d;
@@ -499,6 +509,84 @@
 	font-family: "Pretendard", sans-serif;
 }
 
+/* Worship Schedule Section */
+.worship-section {
+	margin-bottom: 80px;
+}
+
+.worship-section h2 {
+	font-size: 32px;
+	color: #2d5f8d;
+	margin-bottom: 50px;
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	text-align: center;
+}
+
+.worship-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+.worship-card {
+	background: #fff;
+	padding: 24px 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+	border-top: 3px solid #d4a574;
+	text-align: center;
+	transition: all 0.3s ease;
+}
+
+.worship-card:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	transform: translateY(-4px);
+}
+
+.worship-card .worship-icon {
+	font-size: 28px;
+	margin-bottom: 12px;
+	display: block;
+}
+
+.worship-info {
+	margin: 0;
+}
+
+.worship-card h3 {
+	font-size: 15px;
+	color: #2d5f8d;
+	margin-bottom: 6px;
+	font-weight: 700;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.worship-card .worship-time {
+	font-size: 12px;
+	color: #d4a574;
+	font-weight: 600;
+	margin-bottom: 6px;
+	letter-spacing: 0.05em;
+	font-family: "Pretendard", sans-serif;
+}
+
+.worship-card .worship-detail {
+	font-size: 16px;
+	color: #2d5f8d;
+	font-weight: 700;
+	margin-bottom: 0;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.worship-card .worship-desc {
+	font-size: 14px;
+	color: #666;
+	line-height: 1.6;
+	margin-bottom: 0;
+	font-family: "Pretendard", sans-serif;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
 	.about-container {
@@ -571,5 +659,27 @@
 		min-width: 100px;
 		padding: 12px 20px;
 		font-size: 12px;
+	}
+
+	.worship-grid {
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+
+	.worship-card {
+		padding: 20px 16px;
+	}
+
+	.worship-card h3 {
+		font-size: 14px;
+	}
+
+	.worship-card .worship-detail {
+		font-size: 13px;
+	}
+
+	.worship-card .worship-icon {
+		font-size: 24px;
+		margin-bottom: 8px;
 	}
 }
