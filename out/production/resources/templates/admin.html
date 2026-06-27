@@ -221,7 +221,7 @@ body { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; background: #f4
 
     function loadSermons(page) {
         page = page || sermonCurrentPage;
-        fetch(`${API.sermons}?type=all&page=${page}`)
+        fetch(`${API.sermons}?type=all&page=${page}&size=10`)
             .then(r => r.json())
             .then(data => {
                 sermonCurrentPage = data.currentPage;
@@ -233,7 +233,7 @@ body { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; background: #f4
         document.getElementById('sermonTbody').innerHTML = list.length === 0
             ? '<tr><td colspan="7" class="empty-state">등록된 설교가 없습니다.</td></tr>'
             : list.map((s, i) => `<tr>
-                <td>${(currentPage - 1) * 6 + i + 1}</td>
+                <td>${(currentPage - 1) * 10 + i + 1}</td>
                 <td><strong>${esc(s.title)}</strong>${s.verse ? '<br><small style="color:#999">'+esc(s.verse)+'</small>' : ''}</td>
                 <td>${formatDate(s.sermonDate)}</td>
                 <td>${esc(s.pastor || '-')}</td>
@@ -247,8 +247,14 @@ body { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; background: #f4
 
         const pg = document.getElementById('sermonPagination');
         if (!totalPages || totalPages <= 1) { pg.innerHTML = ''; return; }
+
+        const WINDOW = 10;
+        let start = Math.max(1, currentPage - Math.floor(WINDOW / 2));
+        let end   = Math.min(totalPages, start + WINDOW - 1);
+        if (end - start < WINDOW - 1) start = Math.max(1, end - WINDOW + 1);
+
         let html = `<button class="${currentPage <= 1 ? 'disabled' : ''}" onclick="loadSermons(${currentPage - 1})">&lt;</button>`;
-        for (let i = 1; i <= totalPages; i++) {
+        for (let i = start; i <= end; i++) {
             html += `<button class="${i === currentPage ? 'active' : ''}" onclick="loadSermons(${i})">${i}</button>`;
         }
         html += `<button class="${currentPage >= totalPages ? 'disabled' : ''}" onclick="loadSermons(${currentPage + 1})">&gt;</button>`;

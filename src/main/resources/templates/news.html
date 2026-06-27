@@ -50,17 +50,13 @@
     <div class="news-page-title"></div>
 
     <div class="news-container">
-        <div class="news-register-section">
-            <button class="news-register-btn" id="news-register-open">+ 커뮤니티 글 등록</button>
-        </div>
-
         <div class="news-filters">
-            <button class="news-filter-btn" th:classappend="${currentType == 'gospel'}  ? ' active'" th:onclick="'loadNews(\'gospel\', 1)'" >복음통일</button>
-            <button class="news-filter-btn" th:classappend="${currentType == 'news'}    ? ' active'" th:onclick="'loadNews(\'news\', 1)'"   >교회소식</button>
-            <button class="news-filter-btn" th:classappend="${currentType == 'bulletin'}? ' active'" th:onclick="'loadNews(\'bulletin\', 1)'">주보</button>
-            <button class="news-filter-btn" th:classappend="${currentType == 'poetry'}  ? ' active'" th:onclick="'loadNews(\'poetry\', 1)'" >시집</button>
-            <button class="news-filter-btn" th:classappend="${currentType == 'column'}  ? ' active'" th:onclick="'loadNews(\'column\', 1)'" >칼럼</button>
-            <button class="news-filter-btn" th:classappend="${currentType == 'study'}   ? ' active'" th:onclick="'loadNews(\'study\', 1)'"  >Bible Study</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'gospel'}   ? ' active'" data-type="gospel">복음통일</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'news'}     ? ' active'" data-type="news">교회소식</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'bulletin'} ? ' active'" data-type="bulletin">주보</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'poetry'}   ? ' active'" data-type="poetry">시집</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'column'}   ? ' active'" data-type="column">칼럼</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'study'}    ? ' active'" data-type="study">Bible Study</button>
         </div>
 
         <div class="news-list" id="news-list">
@@ -98,20 +94,6 @@
              th:data-current="${currentPage}"
              th:data-total="${totalPages}"
              th:data-type="${currentType}">
-            <button class="pagination-btn"
-                    th:classappend="${currentPage <= 1} ? ' disabled'"
-                    th:data-type="${currentType}"
-                    th:data-page="${currentPage - 1}">&lt;</button>
-            <button class="pagination-btn"
-                    th:each="i : ${#numbers.sequence(1, totalPages)}"
-                    th:text="${i}"
-                    th:classappend="${i == currentPage} ? ' active'"
-                    th:data-type="${currentType}"
-                    th:data-page="${i}"></button>
-            <button class="pagination-btn"
-                    th:classappend="${currentPage >= totalPages} ? ' disabled'"
-                    th:data-type="${currentType}"
-                    th:data-page="${currentPage + 1}">&gt;</button>
         </div>
     </div>
 
@@ -129,6 +111,13 @@
 </div>
 
 <script>
+    // 필터 이벤트 위임
+    document.querySelector('.news-filters').addEventListener('click', function(e) {
+        const btn = e.target.closest('.news-filter-btn');
+        if (!btn) return;
+        loadNews(btn.dataset.type, 1);
+    });
+
     // 아코디언 토글
     function toggleAccordion(header) {
         const content = header.nextElementSibling;
@@ -205,9 +194,16 @@
         container.dataset.total   = totalPages;
         container.dataset.type    = type;
 
+        if (!totalPages || totalPages <= 1) { container.innerHTML = ''; return; }
+
+        const WINDOW = 10;
+        let start = Math.max(1, currentPage - Math.floor(WINDOW / 2));
+        let end   = Math.min(totalPages, start + WINDOW - 1);
+        if (end - start < WINDOW - 1) start = Math.max(1, end - WINDOW + 1);
+
         let html = `<button class="pagination-btn${currentPage <= 1 ? ' disabled' : ''}"
                             onclick="loadNews('${type}', ${currentPage - 1})">&lt;</button>`;
-        for (let i = 1; i <= totalPages; i++) {
+        for (let i = start; i <= end; i++) {
             html += `<button class="pagination-btn${i === currentPage ? ' active' : ''}"
                              onclick="loadNews('${type}', ${i})">${i}</button>`;
         }
@@ -215,6 +211,12 @@
                          onclick="loadNews('${type}', ${currentPage + 1})">&gt;</button>`;
         container.innerHTML = html;
     }
+
+    // 초기 로드 시 windowed 페이지네이션 렌더
+    (function() {
+        const pg = document.getElementById('news-pagination');
+        renderNewsPagination(pg.dataset.type, parseInt(pg.dataset.current) || 1, parseInt(pg.dataset.total) || 1);
+    })();
 </script>
 </body>
 </html>

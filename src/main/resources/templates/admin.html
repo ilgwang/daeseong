@@ -247,8 +247,14 @@ body { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; background: #f4
 
         const pg = document.getElementById('sermonPagination');
         if (!totalPages || totalPages <= 1) { pg.innerHTML = ''; return; }
+
+        const WINDOW = 10;
+        let start = Math.max(1, currentPage - Math.floor(WINDOW / 2));
+        let end   = Math.min(totalPages, start + WINDOW - 1);
+        if (end - start < WINDOW - 1) start = Math.max(1, end - WINDOW + 1);
+
         let html = `<button class="${currentPage <= 1 ? 'disabled' : ''}" onclick="loadSermons(${currentPage - 1})">&lt;</button>`;
-        for (let i = 1; i <= totalPages; i++) {
+        for (let i = start; i <= end; i++) {
             html += `<button class="${i === currentPage ? 'active' : ''}" onclick="loadSermons(${i})">${i}</button>`;
         }
         html += `<button class="${currentPage >= totalPages ? 'disabled' : ''}" onclick="loadSermons(${currentPage + 1})">&gt;</button>`;

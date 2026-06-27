@@ -49,23 +49,11 @@
     <div class="sermon-page-title"></div>
 
     <div class="sermon-container">
-        <div class="sermon-register-section">
-            <button class="sermon-register-btn" id="sermon-register-open">+ 설교영상 등록</button>
-        </div>
-
         <div class="sermon-filters">
-            <button class="sermon-filter-btn"
-                    th:classappend="${currentType == 'all'} ? ' active'"
-                    th:onclick="'loadSermons(\'all\', 1)'">전체</button>
-            <button class="sermon-filter-btn"
-                    th:classappend="${currentType == 'sunday'} ? ' active'"
-                    th:onclick="'loadSermons(\'sunday\', 1)'">주일예배</button>
-            <button class="sermon-filter-btn"
-                    th:classappend="${currentType == 'wednesday'} ? ' active'"
-                    th:onclick="'loadSermons(\'wednesday\', 1)'">수요기도회</button>
-            <button class="sermon-filter-btn"
-                    th:classappend="${currentType == 'friday'} ? ' active'"
-                    th:onclick="'loadSermons(\'friday\', 1)'">복음통일기도회</button>
+            <button class="sermon-filter-btn" th:classappend="${currentType == 'all'}       ? ' active'" data-type="all">전체</button>
+            <button class="sermon-filter-btn" th:classappend="${currentType == 'sunday'}    ? ' active'" data-type="sunday">주일예배</button>
+            <button class="sermon-filter-btn" th:classappend="${currentType == 'wednesday'} ? ' active'" data-type="wednesday">수요기도회</button>
+            <button class="sermon-filter-btn" th:classappend="${currentType == 'friday'}    ? ' active'" data-type="friday">복음통일기도회</button>
         </div>
 
         <div class="sermon-grid" id="sermon-grid">
@@ -100,65 +88,6 @@
              th:data-current="${currentPage}"
              th:data-total="${totalPages}"
              th:data-type="${currentType}">
-            <button class="pagination-btn"
-                    th:data-type="${currentType}"
-                    th:data-page="${currentPage - 1}"
-                    th:classappend="${currentPage <= 1} ? ' disabled'">&lt;</button>
-            <button class="pagination-btn"
-                    th:each="i : ${#numbers.sequence(1, totalPages)}"
-                    th:text="${i}"
-                    th:data-type="${currentType}"
-                    th:data-page="${i}"
-                    th:classappend="${i == currentPage} ? ' active'"></button>
-            <button class="pagination-btn"
-                    th:data-type="${currentType}"
-                    th:data-page="${currentPage + 1}"
-                    th:classappend="${currentPage >= totalPages} ? ' disabled'">&gt;</button>
-        </div>
-    </div>
-
-    <!-- 설교 등록 모달 -->
-    <div id="sermon-register-modal" class="sermon-modal">
-        <div class="sermon-modal-content">
-            <button class="sermon-modal-close">&times;</button>
-            <h2>설교영상 등록</h2>
-            <form id="sermon-register-form">
-                <div class="form-group">
-                    <label for="sermon-title">제목</label>
-                    <input type="text" id="sermon-title" name="title" placeholder="설교 제목을 입력하세요" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="sermon-pastor">설교자</label>
-                        <input type="text" id="sermon-pastor" name="pastor" placeholder="설교자 이름" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sermon-type">설교 타입</label>
-                        <select id="sermon-type" name="type" required>
-                            <option value="">선택</option>
-                            <option value="sunday">주일예배</option>
-                            <option value="wednesday">수요기도회</option>
-                            <option value="friday">복음통일기도회</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="sermon-verse">성경 구절</label>
-                    <input type="text" id="sermon-verse" name="verse" placeholder="예) 요한복음 3장 16절" required>
-                </div>
-                <div class="form-group">
-                    <label for="sermon-date">날짜</label>
-                    <input type="date" id="sermon-date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label for="sermon-url">YouTube URL</label>
-                    <input type="url" id="sermon-url" name="url" placeholder="https://www.youtube.com/watch?v=..." required>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn-submit">등록</button>
-                    <button type="button" class="btn-cancel">취소</button>
-                </div>
-            </form>
         </div>
     </div>
 
@@ -176,67 +105,11 @@
 </div>
 
 <script>
-    // 설교 등록 모달
-    const sermonModal = document.getElementById('sermon-register-modal');
-    document.getElementById('sermon-register-open').addEventListener('click', function(e) {
-        e.preventDefault();
-        sermonModal.classList.add('active');
-    });
-    document.querySelector('.sermon-modal-close').addEventListener('click', function() {
-        sermonModal.classList.remove('active');
-    });
-    document.querySelector('.btn-cancel').addEventListener('click', function(e) {
-        e.preventDefault();
-        sermonModal.classList.remove('active');
-        document.getElementById('sermon-register-form').reset();
-    });
-    sermonModal.addEventListener('click', function(e) {
-        if (e.target === sermonModal) {
-            sermonModal.classList.remove('active');
-            document.getElementById('sermon-register-form').reset();
-        }
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && sermonModal.classList.contains('active')) {
-            sermonModal.classList.remove('active');
-        }
-    });
-
-    // 설교 등록 폼 제출 → API 호출
-    document.getElementById('sermon-register-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const youtubeUrl = document.getElementById('sermon-url').value.trim();
-
-        if (!youtubeUrl) {
-            alert('YouTube URL을 입력해주세요.');
-            return;
-        }
-
-        const payload = {
-            title:      document.getElementById('sermon-title').value,
-            pastor:     document.getElementById('sermon-pastor').value,
-            type:       document.getElementById('sermon-type').value,
-            verse:      document.getElementById('sermon-verse').value,
-            sermonDate: document.getElementById('sermon-date').value,
-            youtubeUrl: youtubeUrl,
-            startTime:  0
-        };
-
-        fetch('/api/sermons', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        })
-        .then(r => r.json())
-        .then(data => {
-            if (data.success) {
-                alert('설교영상이 등록되었습니다.');
-                sermonModal.classList.remove('active');
-                document.getElementById('sermon-register-form').reset();
-                loadSermons('all', 1);
-            }
-        })
-        .catch(() => alert('등록 중 오류가 발생했습니다.'));
+    // 필터 버튼 이벤트 위임
+    document.querySelector('.sermon-filters').addEventListener('click', function(e) {
+        const btn = e.target.closest('.sermon-filter-btn');
+        if (!btn) return;
+        loadSermons(btn.dataset.type, 1);
     });
 
     // 탭 필터 + 페이지네이션: API 호출 후 DOM 갱신
@@ -294,9 +167,14 @@
         container.dataset.total   = totalPages;
         container.dataset.type    = type;
 
+        const WINDOW = 10;
+        let start = Math.max(1, currentPage - Math.floor(WINDOW / 2));
+        let end   = Math.min(totalPages, start + WINDOW - 1);
+        if (end - start < WINDOW - 1) start = Math.max(1, end - WINDOW + 1);
+
         let html = `<button class="pagination-btn${currentPage <= 1 ? ' disabled' : ''}"
                             onclick="loadSermons('${type}', ${currentPage - 1})">&lt;</button>`;
-        for (let i = 1; i <= totalPages; i++) {
+        for (let i = start; i <= end; i++) {
             html += `<button class="pagination-btn${i === currentPage ? ' active' : ''}"
                              onclick="loadSermons('${type}', ${i})">${i}</button>`;
         }
@@ -317,6 +195,15 @@
         if (!btn || btn.classList.contains('disabled')) return;
         loadSermons(btn.dataset.type, parseInt(btn.dataset.page));
     });
+
+    // 초기 로드 시 Thymeleaf가 전체 페이지를 렌더링하므로 JS로 덮어씌워 윈도우 적용
+    (function() {
+        const pg = document.getElementById('sermon-pagination');
+        const type  = pg.dataset.type;
+        const cur   = parseInt(pg.dataset.current) || 1;
+        const total = parseInt(pg.dataset.total)   || 1;
+        renderPagination(type, cur, total);
+    })();
 </script>
 </body>
 </html>
