@@ -12,8 +12,8 @@ spring:
 
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 50MB
+      max-file-size: 100MB
+      max-request-size: 200MB
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
@@ -24,6 +24,12 @@ mybatis:
 
 server:
   port: 8080
+
+app:
+  upload-dir: ${user.dir}/src/main/resources/static/uploads
+  admin:
+    username: admin
+    password: daeseong2013
 
 logging:
   level:
