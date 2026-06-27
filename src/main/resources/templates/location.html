@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>오시는길 — 대성교회</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" th:href="@{/css/normalize.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/responsible.css}">
+<link rel="stylesheet" th:href="@{/css/modern-design.css}">
+<link rel="stylesheet" th:href="@{/css/footer.css}">
+<link rel="stylesheet" th:href="@{/css/sermons-gallery.css}">
+<link rel="stylesheet" th:href="@{/css/location.css}">
+</head>
+<body>
+<div id="wrap">
+    <div id="vis_sec" class="vis_sec_bg" style="padding: 0px;">
+        <header id="header">
+            <link rel="stylesheet" th:href="@{/css/superfish.css}">
+            <link rel="stylesheet" th:href="@{/css/style.css}">
+            <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+            <script th:src="@{/css/jquery.slicknav.js}"></script>
+            <script type="text/javascript">
+                $(document).ready(function(){ $('#menu').slicknav(); });
+            </script>
+            <div class="header_top_item">
+                <ul class="top_section" style="right:-5px;top:20px">
+                    <li><a th:href="@{/admin}">관리자</a></li>
+                </ul>
+                <h1><a th:href="@{/}"><img th:src="@{/image/index_logo_daeseong.png}" alt="대성교회" /></a></h1>
+                <div id="m_nav"></div>
+                <div class="header_gnb">
+                    <div class="main_nav">
+                        <nav class="nav">
+                            <ul class="sf-menu" id="menu">
+                                <li><a th:href="@{/about}">교회소개</a></li>
+                                <li><a th:href="@{/sermons}">설교영상</a></li>
+                                <li><a th:href="@{/news}">커뮤니티</a></li>
+                                <li><a th:href="@{/location}">오시는길</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="location-page-title"></div>
+
+    <div class="location-container">
+        <div class="location-content">
+            <div class="location-info">
+                <h2>🚌 오시는 길</h2>
+                <div class="info-item">
+                    <div class="info-label">지하철</div>
+                    <div class="info-text">분당선 기흥역 하차 → 우함빌딩 위치 안내</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">자동차</div>
+                    <div class="info-text">내비게이션 주소 검색: 경기도 용인시 기흥구 동백중앙로 175 우함빌딩</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">주차</div>
+                    <div class="info-text">우함빌딩 주차장 이용<br>충분한 주차 공간이 있습니다.</div>
+                </div>
+            </div>
+            <div class="location-map">
+                <img th:src="@{/image/map.jpg}" alt="대성교회 위치" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+        <div style="margin-bottom: 60px;">
+            <iframe src="https://map.kakao.com/link/map/대성교회,37.2699705047789,127.154168483979"
+                    style="border:none;width:100%;height:450px;border-radius:12px;"></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="inner_footer">
+            <p><img th:src="@{/image/footer_logo2.png}" alt="" /></p>
+            <address>
+                <p><a href="#">온라인 헌금계좌 안내 &nbsp;&nbsp;&nbsp;&nbsp;예금주: &nbsp;대한예수교장로회 대성교회, &nbsp;&nbsp;국민은행, 867901-00-030346</a></p>
+                <p>우편번호 (17006) 경기도 용인시 기흥구 동백중앙로 175  우함빌딩 901호</p>
+                <p>E-Mail : daeseong2013@naver.com</p>
+                <p th:text="'Copyright ⓒ ' + ${#temporals.year(#temporals.createNow())} + ' 대성교회 all right reserved'"></p>
+            </address>
+        </div>
+    </footer>
+</div>
+<script th:src="@{/js/sns-login-modal.js}"></script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관리자 — 대성교회</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; background: #f4f5f7; color: #333; }
+.sidebar { position: fixed; left: 0; top: 0; width: 220px; height: 100vh; background: linear-gradient(180deg, #22083d 0%, #3a0d65 100%); color: #fff; display: flex; flex-direction: column; z-index: 100; }
+.sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.12); text-align: center; }
+.sidebar-logo img { max-width: 110px; }
+.sidebar-logo span { display: block; font-size: 12px; opacity: 0.6; margin-top: 6px; }
+.sidebar-nav { flex: 1; padding: 16px 0; }
+.sidebar-nav a { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; transition: all 0.2s; cursor: pointer; }
+.sidebar-nav a:hover, .sidebar-nav a.active { background: rgba(255,255,255,0.12); color: #fff; }
+.sidebar-nav .icon { font-size: 16px; width: 20px; text-align: center; }
+.sidebar-bottom { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.12); }
+.logout-btn { display: block; width: 100%; padding: 10px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; font-size: 13px; cursor: pointer; text-align: center; font-family: inherit; transition: all 0.2s; text-decoration: none; }
+.logout-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+.main { margin-left: 220px; min-height: 100vh; display: flex; flex-direction: column; }
+.topbar { background: #fff; padding: 16px 32px; border-bottom: 1px solid #e0e0e0; }
+.topbar h1 { font-size: 18px; color: #22083d; }
+.page-content { padding: 32px; flex: 1; }
+.panel { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 32px; display: none; }
+.panel.active { display: block; }
+.panel-header { padding: 20px 24px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+.panel-header h2 { font-size: 16px; color: #22083d; }
+.btn { padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; font-family: inherit; transition: all 0.2s; }
+.btn-primary { background: #6b22a8; color: #fff; }
+.btn-primary:hover { background: #501a7e; }
+.btn-danger { background: #e53935; color: #fff; padding: 6px 12px; font-size: 12px; }
+.btn-danger:hover { background: #c62828; }
+.btn-edit { background: #f5f5f5; color: #555; padding: 6px 12px; font-size: 12px; margin-right: 4px; }
+.btn-edit:hover { background: #e0e0e0; }
+.btn-cancel { background: #f5f5f5; color: #555; }
+.btn-cancel:hover { background: #e0e0e0; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th { background: #fafafa; padding: 12px 16px; text-align: left; font-size: 12px; color: #888; font-weight: 600; border-bottom: 1px solid #eee; }
+.data-table td { padding: 14px 16px; border-bottom: 1px solid #f5f5f5; font-size: 14px; vertical-align: middle; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: #fafafa; }
+.empty-state { text-align: center; padding: 48px; color: #bbb; font-size: 14px; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: none; align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal { background: #fff; border-radius: 10px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.modal-header { padding: 20px 24px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+.modal-header h3 { font-size: 16px; color: #22083d; }
+.modal-close { background: none; border: none; font-size: 22px; cursor: pointer; color: #999; line-height: 1; }
+.modal-body { padding: 24px; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 13px; color: #555; margin-bottom: 6px; font-weight: 500; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.2s; resize: vertical; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #6b22a8; box-shadow: 0 0 0 3px rgba(107,34,168,0.1); }
+.modal-footer { padding: 16px 24px; border-top: 1px solid #f0f0f0; display: flex; justify-content: flex-end; gap: 10px; }
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.badge-sunday { background: #ede7f6; color: #6b22a8; }
+.badge-wed { background: #e8f5e9; color: #2e7d32; }
+.badge-other { background: #fff3e0; color: #e65100; }
+.admin-pagination { display: flex; justify-content: center; gap: 6px; padding: 20px 0; }
+.admin-pagination button { min-width: 36px; height: 36px; border: 1px solid #ddd; background: #fff; color: #555; border-radius: 6px; font-size: 13px; font-family: inherit; cursor: pointer; transition: all 0.2s; }
+.admin-pagination button:hover { border-color: #6b22a8; color: #6b22a8; }
+.admin-pagination button.active { background: #6b22a8; color: #fff; border-color: #6b22a8; }
+.admin-pagination button.disabled { opacity: 0.4; cursor: default; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <img th:src="@{/image/index_logo_daeseong.png}" alt="대성교회">
+        <span>관리자 대시보드</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a class="active" onclick="showPanel('sermons')" id="nav-sermons">
+            <span class="icon">🎬</span> 설교영상 관리
+        </a>
+        <a onclick="showPanel('community')" id="nav-community">
+            <span class="icon">📋</span> 커뮤니티 관리
+        </a>
+        <a th:href="@{/}">
+            <span class="icon">🏠</span> 메인 페이지
+        </a>
+    </nav>
+    <div class="sidebar-bottom">
+        <a th:href="@{/}" class="logout-btn">← 사이트로 돌아가기</a>
+    </div>
+</div>
+
+<div class="main">
+    <div class="topbar">
+        <h1 id="topbar-title">설교영상 관리</h1>
+    </div>
+    <div class="page-content">
+        <!-- 설교영상 패널 -->
+        <div class="panel active" id="panel-sermons">
+            <div class="panel-header">
+                <h2>설교영상 목록</h2>
+                <button class="btn btn-primary" onclick="openSermonModal()">+ 설교 등록</button>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th><th>제목</th><th>날짜</th><th>설교자</th><th>분류</th><th>유튜브</th><th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sermonTbody"></tbody>
+                </table>
+            </div>
+            <div class="admin-pagination" id="sermonPagination"></div>
+        </div>
+
+        <!-- 커뮤니티 패널 -->
+        <div class="panel" id="panel-community">
+            <div class="panel-header">
+                <h2>커뮤니티 게시글 목록</h2>
+                <button class="btn btn-primary" onclick="openPostModal()">+ 게시글 등록</button>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th><th>제목</th><th>날짜</th><th>분류</th><th>내용 요약</th><th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="communityTbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 설교 등록/수정 모달 -->
+<div class="modal-overlay" id="sermonModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="sermonModalTitle">설교 등록</h3>
+            <button class="modal-close" onclick="closeModal('sermonModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="sermonEditId">
+            <div class="form-group"><label>제목 *</label><input type="text" id="sermonTitle" placeholder="설교 제목"></div>
+            <div class="form-group"><label>날짜 *</label><input type="date" id="sermonDate"></div>
+            <div class="form-group"><label>설교자</label><input type="text" id="sermonPastor" value="손정열"></div>
+            <div class="form-group">
+                <label>분류</label>
+                <select id="sermonCategory">
+                    <option value="sunday">주일예배</option>
+                    <option value="wednesday">수요기도회</option>
+                    <option value="friday">복음통일기도회</option>
+                </select>
+            </div>
+            <div class="form-group"><label>YouTube URL *</label><input type="url" id="sermonYoutube" placeholder="https://www.youtube.com/watch?v=..."></div>
+            <div class="form-group"><label>성경 본문</label><input type="text" id="sermonBible" placeholder="예: 요한복음 3:16"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-cancel" onclick="closeModal('sermonModal')">취소</button>
+            <button class="btn btn-primary" onclick="saveSermon()">저장</button>
+        </div>
+    </div>
+</div>
+
+<!-- 커뮤니티 등록/수정 모달 -->
+<div class="modal-overlay" id="postModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="postModalTitle">게시글 등록</h3>
+            <button class="modal-close" onclick="closeModal('postModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="postEditId">
+            <div class="form-group"><label>제목 *</label><input type="text" id="postTitle" placeholder="게시글 제목"></div>
+            <div class="form-group"><label>날짜 *</label><input type="date" id="postDate"></div>
+            <div class="form-group">
+                <label>분류</label>
+                <select id="postCategory">
+                    <option value="gospel">복음통일</option>
+                    <option value="news">교회소식</option>
+                    <option value="bulletin">주보</option>
+                    <option value="poetry">시집</option>
+                    <option value="column">칼럼</option>
+                    <option value="study">Bible Study</option>
+                </select>
+            </div>
+            <div class="form-group"><label>작성자</label><input type="text" id="postAuthor" placeholder="작성자 이름"></div>
+            <div class="form-group"><label>내용 *</label><textarea id="postContent" rows="6" placeholder="내용을 입력하세요"></textarea></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-cancel" onclick="closeModal('postModal')">취소</button>
+            <button class="btn btn-primary" onclick="savePost()">저장</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API = { sermons: '/api/sermons', news: '/api/news' };
+    const typeLabel = { sunday:'주일예배', wednesday:'수요기도회', friday:'복음통일기도회' };
+    const newsLabel = { gospel:'복음통일', news:'교회소식', bulletin:'주보', poetry:'시집', column:'칼럼', study:'Bible Study' };
+
+    function showPanel(name) {
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.sidebar-nav a[id]').forEach(a => a.classList.remove('active'));
+        document.getElementById('panel-' + name).classList.add('active');
+        document.getElementById('nav-' + name).classList.add('active');
+        document.getElementById('topbar-title').textContent = name === 'sermons' ? '설교영상 관리' : '커뮤니티 관리';
+    }
+
+    function esc(s) {
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function formatDate(d) {
+        if (!d) return '-';
+        if (Array.isArray(d)) return `${d[0]}-${String(d[1]).padStart(2,'0')}-${String(d[2]).padStart(2,'0')}`;
+        return String(d).slice(0,10);
+    }
+
+    // ── 설교 ──
+    let sermonCurrentPage = 1;
+
+    function loadSermons(page) {
+        page = page || sermonCurrentPage;
+        fetch(`${API.sermons}?type=all&page=${page}`)
+            .then(r => r.json())
+            .then(data => {
+                sermonCurrentPage = data.currentPage;
+                renderSermons(data.sermons || [], data.currentPage, data.totalPages);
+            });
+    }
+
+    function renderSermons(list, currentPage, totalPages) {
+        document.getElementById('sermonTbody').innerHTML = list.length === 0
+            ? '<tr><td colspan="7" class="empty-state">등록된 설교가 없습니다.</td></tr>'
+            : list.map((s, i) => `<tr>
+                <td>${(currentPage - 1) * 6 + i + 1}</td>
+                <td><strong>${esc(s.title)}</strong>${s.verse ? '<br><small style="color:#999">'+esc(s.verse)+'</small>' : ''}</td>
+                <td>${formatDate(s.sermonDate)}</td>
+                <td>${esc(s.pastor || '-')}</td>
+                <td><span class="badge badge-sunday">${typeLabel[s.type] || s.type}</span></td>
+                <td>${s.youtubeUrl ? `<a href="${esc(s.youtubeUrl)}" target="_blank" style="color:#6b22a8;font-size:13px">보기</a>` : '-'}</td>
+                <td>
+                    <button class="btn btn-edit" onclick="editSermon(${s.id})">수정</button>
+                    <button class="btn btn-danger" onclick="deleteSermon(${s.id})">삭제</button>
+                </td>
+            </tr>`).join('');
+
+        const pg = document.getElementById('sermonPagination');
+        if (!totalPages || totalPages <= 1) { pg.innerHTML = ''; return; }
+        let html = `<button class="${currentPage <= 1 ? 'disabled' : ''}" onclick="loadSermons(${currentPage - 1})">&lt;</button>`;
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<button class="${i === currentPage ? 'active' : ''}" onclick="loadSermons(${i})">${i}</button>`;
+        }
+        html += `<button class="${currentPage >= totalPages ? 'disabled' : ''}" onclick="loadSermons(${currentPage + 1})">&gt;</button>`;
+        pg.innerHTML = html;
+    }
+
+    function openSermonModal() {
+        ['sermonEditId','sermonTitle','sermonYoutube','sermonBible'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('sermonDate').value = new Date().toISOString().slice(0,10);
+        document.getElementById('sermonPastor').value = '손정열';
+        document.getElementById('sermonCategory').value = 'sunday';
+        document.getElementById('sermonModalTitle').textContent = '설교 등록';
+        document.getElementById('sermonModal').classList.add('open');
+    }
+
+    function editSermon(id) {
+        fetch(`${API.sermons}/${id}`)
+            .then(r => r.json())
+            .then(s => {
+                document.getElementById('sermonEditId').value = s.id;
+                document.getElementById('sermonTitle').value    = s.title || '';
+                document.getElementById('sermonDate').value     = formatDate(s.sermonDate);
+                document.getElementById('sermonPastor').value   = s.pastor || '';
+                document.getElementById('sermonCategory').value = s.type || 'sunday';
+                document.getElementById('sermonYoutube').value  = s.youtubeUrl || '';
+                document.getElementById('sermonBible').value    = s.verse || '';
+                document.getElementById('sermonModalTitle').textContent = '설교 수정';
+                document.getElementById('sermonModal').classList.add('open');
+            });
+    }
+
+    function saveSermon() {
+        const title = document.getElementById('sermonTitle').value.trim();
+        const date  = document.getElementById('sermonDate').value;
+        if (!title) { alert('제목을 입력하세요.'); return; }
+        if (!date)  { alert('날짜를 선택하세요.'); return; }
+
+        const youtubeUrl = document.getElementById('sermonYoutube').value.trim();
+
+        const payload = {
+            title,
+            pastor:     document.getElementById('sermonPastor').value.trim(),
+            type:       document.getElementById('sermonCategory').value,
+            verse:      document.getElementById('sermonBible').value.trim(),
+            sermonDate: date,
+            youtubeUrl,
+            startTime:  0
+        };
+
+        const editId = document.getElementById('sermonEditId').value;
+        const method = editId ? 'PUT' : 'POST';
+        const url    = editId ? `${API.sermons}/${editId}` : API.sermons;
+
+        fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+            .then(r => r.json())
+            .then(() => { closeModal('sermonModal'); loadSermons(editId ? sermonCurrentPage : 1); });
+    }
+
+    function deleteSermon(id) {
+        if (!confirm('이 설교를 삭제하시겠습니까?')) return;
+        fetch(`${API.sermons}/${id}`, { method: 'DELETE' })
+            .then(() => loadSermons(sermonCurrentPage));
+    }
+
+    // ── 커뮤니티 ──
+    function loadPosts() {
+        fetch(`${API.news}?type=all&page=1`)
+            .then(r => r.json())
+            .then(data => renderPosts(data.news || []));
+    }
+
+    function renderPosts(list) {
+        document.getElementById('communityTbody').innerHTML = list.length === 0
+            ? '<tr><td colspan="6" class="empty-state">등록된 게시글이 없습니다.</td></tr>'
+            : list.map((p, i) => `<tr>
+                <td>${i+1}</td>
+                <td><strong>${esc(p.title)}</strong></td>
+                <td>${formatDate(p.newsDate)}</td>
+                <td>${newsLabel[p.type] || p.type}</td>
+                <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc((p.content||'').replace(/<[^>]+>/g,'').slice(0,60))}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="deletePost(${p.id})">삭제</button>
+                </td>
+            </tr>`).join('');
+    }
+
+    function openPostModal() {
+        ['postEditId','postTitle','postContent','postAuthor'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('postDate').value = new Date().toISOString().slice(0,10);
+        document.getElementById('postCategory').value = 'gospel';
+        document.getElementById('postModalTitle').textContent = '게시글 등록';
+        document.getElementById('postModal').classList.add('open');
+    }
+
+    function savePost() {
+        const title   = document.getElementById('postTitle').value.trim();
+        const date    = document.getElementById('postDate').value;
+        const content = document.getElementById('postContent').value.trim();
+        if (!title)   { alert('제목을 입력하세요.'); return; }
+        if (!date)    { alert('날짜를 선택하세요.'); return; }
+        if (!content) { alert('내용을 입력하세요.'); return; }
+
+        const payload = {
+            title,
+            type:     document.getElementById('postCategory').value,
+            content,
+            author:   document.getElementById('postAuthor').value.trim(),
+            newsDate: date
+        };
+
+        fetch(API.news, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+            .then(r => r.json())
+            .then(() => { closeModal('postModal'); loadPosts(); });
+    }
+
+    function deletePost(id) {
+        if (!confirm('이 게시글을 삭제하시겠습니까?')) return;
+        fetch(`${API.news}/${id}`, { method: 'DELETE' })
+            .then(() => loadPosts());
+    }
+
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    document.querySelectorAll('.modal-overlay').forEach(o => {
+        o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+    });
+
+    loadSermons();
+    loadPosts();
+</script>
+</body>
+</html>

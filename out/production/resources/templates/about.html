@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>교회소개 — 대성교회</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" th:href="@{/css/normalize.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/responsible.css}">
+<link rel="stylesheet" th:href="@{/css/modern-design.css}">
+<link rel="stylesheet" th:href="@{/css/footer.css}">
+<link rel="stylesheet" th:href="@{/css/sermons-gallery.css}">
+<link rel="stylesheet" th:href="@{/css/about.css}">
+</head>
+<body>
+<div id="wrap">
+    <div id="vis_sec" class="vis_sec_bg" style="padding: 0px;">
+        <header id="header">
+            <link rel="stylesheet" th:href="@{/css/superfish.css}">
+            <link rel="stylesheet" th:href="@{/css/style.css}">
+            <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+            <script th:src="@{/css/jquery.slicknav.js}"></script>
+            <script type="text/javascript">
+                $(document).ready(function(){ $('#menu').slicknav(); });
+            </script>
+            <div class="header_top_item">
+                <ul class="top_section" style="right:-5px;top:20px">
+                    <li><a th:href="@{/admin}">관리자</a></li>
+                </ul>
+                <h1><a th:href="@{/}"><img th:src="@{/image/index_logo_daeseong.png}" alt="대성교회" /></a></h1>
+                <div id="m_nav"></div>
+                <div class="header_gnb">
+                    <div class="main_nav">
+                        <nav class="nav">
+                            <ul class="sf-menu" id="menu">
+                                <li><a th:href="@{/about}">교회소개</a></li>
+                                <li><a th:href="@{/sermons}">설교영상</a></li>
+                                <li><a th:href="@{/news}">커뮤니티</a></li>
+                                <li><a th:href="@{/location}">오시는길</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="about-page-title">
+        <p>새 계명을 너희에게 주노니 서로 사랑하라.<br>내가 너희를 사랑한 것 같이 너희도 서로 사랑하라.<br>(요한복음 13:34)</p>
+    </div>
+
+    <div class="about-container">
+        <section class="church-vision">
+            <div class="church-message">
+                <p>대성교회는 예수 그리스도의 사랑으로 한반도 복음통일과<br>세계복음화에 참여하는 공동체입니다.</p>
+            </div>
+            <div class="church-values">
+                <div class="value-item">말씀과 기도로 뿌리 내리는 공동체</div>
+                <div class="value-item">서로 사랑하며 성장하는 공동체</div>
+                <div class="value-item">복음의 열매를 맺어가는 공동체</div>
+            </div>
+            <div class="church-info">
+                <p>대성교회는 대한예수교장로회 통합교단에 소속되어 있습니다.</p>
+            </div>
+        </section>
+
+        <section class="pastor-section">
+            <h2>담임목사</h2>
+            <div class="pastor-content">
+                <div class="pastor-image">
+                    <img th:src="@{/image/250203_1.jpg}" alt="손정열 목사" />
+                </div>
+                <div class="pastor-info">
+                    <h3>손정열 담임목사 <span>Senior Pastor</span></h3>
+                    <div class="pastor-details">
+                        <p><strong>학력</strong></p>
+                        <ul>
+                            <li>단천탐사단과대학 지질탐사학과 중퇴</li>
+                            <li>청진고등경제전문학교 상업경영학과 졸업(통신)</li>
+                            <li>장로회신학대학교 신학과 졸업(Th.B.)</li>
+                            <li>장로회신학대학교 신학대학원 신학과 졸업(M.Div.)</li>
+                            <li>장로회신학대학교 일반대학원 선교신학 석사(Th.M.)</li>
+                        </ul>
+                        <p><strong>경력</strong></p>
+                        <ul>
+                            <li>영락교회 자유인예배부 교육전도사</li>
+                            <li>대성교회 개척</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="worship-section">
+            <h2>📅 예배 안내</h2>
+            <div class="worship-grid">
+                <div class="worship-card">
+                    <div class="worship-icon">✝️</div>
+                    <div class="worship-info"><h3>주일 예배</h3><p class="worship-detail">오전 11시</p></div>
+                </div>
+                <div class="worship-card">
+                    <div class="worship-icon">🙏</div>
+                    <div class="worship-info"><h3>수요 기도회</h3><p class="worship-detail">저녁 8시</p></div>
+                </div>
+                <div class="worship-card">
+                    <div class="worship-icon">🕯️</div>
+                    <div class="worship-info">
+                        <h3>복음통일기도회</h3>
+                        <p class="worship-time">(매 월 마지막 주일)</p>
+                        <p class="worship-detail">주일 오후 1시</p>
+                    </div>
+                </div>
+                <div class="worship-card">
+                    <div class="worship-icon">📖</div>
+                    <div class="worship-info"><h3>청·장년부 성경공부</h3><p class="worship-detail">주일 오후 1시</p></div>
+                </div>
+                <div class="worship-card">
+                    <div class="worship-icon">📚</div>
+                    <div class="worship-info"><h3>초·중·고 성경공부</h3><p class="worship-detail">주일 오후 1시</p></div>
+                </div>
+                <div class="worship-card">
+                    <div class="worship-icon">🎈</div>
+                    <div class="worship-info"><h3>아동부 활동</h3><p class="worship-detail">주일 오후 1시</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-section">
+            <h2>우리가 걸어온 길</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h4>디지털 사역 시작</h4>
+                        <p>온라인 예배 및 영상 설교 서비스를 시작하였습니다.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h4>선교 활동 강화</h4>
+                        <p>국내외 선교 활동을 더욱 활발히 전개하였습니다.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div>
+                    <div class="timeline-content">
+                        <h4>교회 개척</h4>
+                        <p>서울 홍대에서 대성교회를 개척하였습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="inner_footer">
+            <p><img th:src="@{/image/footer_logo2.png}" alt="" /></p>
+            <address>
+                <p><a href="#">온라인 헌금계좌 안내 &nbsp;&nbsp;&nbsp;&nbsp;예금주: &nbsp;대한예수교장로회 대성교회, &nbsp;&nbsp;국민은행, 867901-00-030346</a></p>
+                <p>우편번호 (17006) 경기도 용인시 기흥구 동백중앙로 175  우함빌딩 901호</p>
+                <p>E-Mail : daeseong2013@naver.com</p>
+                <p th:text="'Copyright ⓒ ' + ${#temporals.year(#temporals.createNow())} + ' 대성교회 all right reserved'"></p>
+            </address>
+        </div>
+    </footer>
+</div>
+<script th:src="@{/js/sns-login-modal.js}"></script>
+</body>
+</html>

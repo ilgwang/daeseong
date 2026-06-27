@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.church.daeseong.mapper.SermonMapper">
+
+    <select id="selectSermons" resultType="Sermon">
+        SELECT id, title, pastor, type, verse, sermon_date, youtube_url, start_time, created_at
+        FROM sermon
+        <where>
+            <if test="type != null and type != '' and type != 'all'">
+                AND type = #{type}
+            </if>
+        </where>
+        ORDER BY sermon_date DESC, id DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countSermons" resultType="int">
+        SELECT COUNT(*) FROM sermon
+        <where>
+            <if test="type != null and type != '' and type != 'all'">
+                AND type = #{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" resultType="Sermon">
+        SELECT id, title, pastor, type, verse, sermon_date, youtube_url, start_time, created_at
+        FROM sermon WHERE id = #{id}
+    </select>
+
+    <insert id="insertSermon" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sermon (title, pastor, type, verse, sermon_date, youtube_url, start_time)
+        VALUES (#{title}, #{pastor}, #{type}, #{verse}, #{sermonDate}, #{youtubeUrl}, #{startTime})
+    </insert>
+
+    <update id="updateSermon">
+        UPDATE sermon
+        SET title       = #{title},
+            pastor      = #{pastor},
+            type        = #{type},
+            verse       = #{verse},
+            sermon_date = #{sermonDate},
+            youtube_url = #{youtubeUrl},
+            start_time  = #{startTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteSermon">
+        DELETE FROM sermon WHERE id = #{id}
+    </delete>
+
+</mapper>

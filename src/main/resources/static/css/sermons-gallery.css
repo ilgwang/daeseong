@@ -1,0 +1,842 @@
+#header {
+	background: linear-gradient(135deg, #22083d 0%, #501a7e 50%, #2c0a4c 100%) !important;
+}
+
+.header_gnb {
+	position: relative;
+	top: 4px;
+	right: -55px;
+	font-weight: 400;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+#menu > li > a {
+	font-size: 20px !important;
+	padding: 14px 0px !important;
+}
+
+#menu > li {
+	margin: 0 -6px !important;
+}
+
+.top_section {
+	gap: 12px !important;
+}
+
+.sermon-page-title {
+	width: 100%;
+	background: url(../image/board2.jpg) no-repeat center / 100% 100%;
+	position: relative;
+	overflow: hidden;
+	min-height: 32vh;
+}
+
+.sermon-page-title::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse at 20% 20%, rgba(45, 95, 141, 0.5), transparent),
+				radial-gradient(ellipse at 80% 80%, rgba(45, 95, 141, 0.4), transparent);
+	pointer-events: none;
+}
+
+.page-title-inner {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 195px 20px;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 1;
+	text-align: center;
+	color: #fff;
+}
+
+.sermon-page-title h1 {
+	font-size: 48px;
+	font-weight: 700;
+	margin-bottom: 15px;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	letter-spacing: -0.02em;
+}
+
+.sermon-page-title p {
+	font-size: 18px;
+	color: rgba(255, 255, 255, 0.9);
+	max-width: 600px;
+	margin: 0 auto;
+	line-height: 1.6;
+}
+
+.sermon-container {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 60px 20px;
+	box-sizing: border-box;
+}
+
+.sermon-filters {
+	display: flex;
+	gap: 15px;
+	margin-bottom: 50px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.sermon-filter-btn {
+	padding: 12px 28px;
+	border: 2px solid #d4a574;
+	background: transparent;
+	color: #2d5f8d;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 15px;
+	transition: all 0.3s ease;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.sermon-filter-btn:hover,
+.sermon-filter-btn.active {
+	background: #7b35b5;
+	color: #fff;
+	border-color: #7b35b5;
+}
+
+.sermon-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 30px;
+	margin-bottom: 60px;
+}
+
+.sermon-card {
+	background: #fff;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	transition: all 0.35s cubic-bezier(0.23, 1, 0.320, 1);
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+	flex-direction: column;
+}
+
+.sermon-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.sermon-thumb {
+	position: relative;
+	width: 100%;
+	height: 200px;
+	background: linear-gradient(135deg, #2d5f8d, #4a7ba7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 60px;
+	overflow: hidden;
+}
+
+.sermon-thumb iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.sermon-info {
+	padding: 25px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.sermon-date {
+	font-size: 13px;
+	color: #d4a574;
+	font-weight: 600;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+.sermon-title {
+	font-size: 18px;
+	font-weight: 700;
+	color: #2d5f8d;
+	margin-bottom: 12px;
+	line-height: 1.4;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.sermon-verse {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 15px;
+	font-style: italic;
+}
+
+.sermon-pastor {
+	margin-top: auto;
+	padding-top: 15px;
+	border-top: 1px solid #e0e0e0;
+	font-size: 13px;
+	color: #999;
+	font-weight: 500;
+}
+
+.sermon-pagination {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 50px;
+}
+
+.pagination-btn {
+	min-width: 45px;
+	height: 45px;
+	border: 1px solid #d4a574;
+	background: transparent;
+	color: #2d5f8d;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 600;
+	transition: all 0.3s ease;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.pagination-btn:hover,
+.pagination-btn.active {
+	background: #7b35b5;
+	color: #fff;
+	border-color: #7b35b5;
+}
+
+@media (max-width: 1024px) {
+	.sermon-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
+	}
+}
+
+.sermon-register-section {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+.sermon-register-btn {
+	padding: 14px 32px;
+	background: #7b35b5;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	font-weight: 700;
+	font-size: 16px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.sermon-register-btn:hover {
+	background: #6228a0;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(54, 8, 78, 0.3);
+}
+
+.sermon-modal {
+	display: none;
+	position: fixed;
+	z-index: 10000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	align-items: center;
+	justify-content: center;
+	overflow-y: auto;
+}
+
+.sermon-modal.active {
+	display: flex;
+}
+
+.sermon-modal-content {
+	background: #fff;
+	border-radius: 12px;
+	padding: 40px;
+	width: 90%;
+	max-width: 500px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+	position: relative;
+	margin: 40px 0;
+}
+
+.sermon-modal-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	background: none;
+	border: none;
+	font-size: 28px;
+	cursor: pointer;
+	color: #999;
+	transition: color 0.3s;
+}
+
+.sermon-modal-close:hover {
+	color: #333;
+}
+
+.sermon-modal-content h2 {
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 20px;
+	color: #333;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+#sermon-register-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.form-group label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.form-group input,
+.form-group select {
+	padding: 12px 14px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	font-size: 14px;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+	transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+	outline: none;
+	border-color: #2d5f8d;
+	box-shadow: 0 0 0 3px rgba(45, 95, 141, 0.1);
+}
+
+.form-group input::placeholder {
+	color: #bbb;
+}
+
+.form-actions {
+	display: flex;
+	gap: 12px;
+	margin-top: 25px;
+}
+
+.btn-submit,
+.btn-cancel {
+	flex: 1;
+	padding: 14px 20px;
+	border: none;
+	border-radius: 8px;
+	font-weight: 600;
+	font-size: 15px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.btn-submit {
+	background: #7b35b5;
+	color: #fff;
+}
+
+.btn-submit:hover {
+	background: #6228a0;
+}
+
+.btn-cancel {
+	background: #f0f0f0;
+	color: #666;
+	border: 1px solid #ddd;
+}
+
+.btn-cancel:hover {
+	background: #e0e0e0;
+}
+
+.sns-modal {
+	display: none;
+	position: fixed;
+	z-index: 10000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	align-items: center;
+	justify-content: center;
+}
+
+.sns-modal.active {
+	display: flex;
+}
+
+.sns-modal-content {
+	background: #fff;
+	border-radius: 12px;
+	padding: 40px 30px;
+	width: 90%;
+	max-width: 400px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+	position: relative;
+}
+
+.sns-modal-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	background: none;
+	border: none;
+	font-size: 28px;
+	cursor: pointer;
+	color: #999;
+	transition: color 0.3s;
+}
+
+.sns-modal-close:hover {
+	color: #333;
+}
+
+.sns-modal-content h2 {
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 20px;
+	color: #333;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.sns-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sns-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 14px 16px;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 15px;
+	transition: all 0.3s ease;
+	color: #fff;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.kakao-btn {
+	background: #FFE812;
+}
+
+.kakao-btn:hover {
+	background: #FFCF00;
+}
+
+.naver-btn {
+	background: #00C73C;
+	color: #fff;
+}
+
+.naver-btn:hover {
+	background: #00B030;
+}
+
+.google-btn {
+	background: #4285F4;
+	color: #fff;
+}
+
+.google-btn:hover {
+	background: #3367D6;
+}
+
+.admin-login-divider {
+	text-align: center;
+	color: #ccc;
+	margin: 20px 0 15px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.admin-login-link {
+	display: block;
+	text-align: center;
+	padding: 12px 16px;
+	color: #2d5f8d;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 600;
+	border: 2px solid #2d5f8d;
+	border-radius: 8px;
+	transition: all 0.3s ease;
+	font-family: "Noto Sans KR", "Pretendard", sans-serif;
+}
+
+.admin-login-link:hover {
+	background: #2d5f8d;
+	color: #fff;
+}
+
+@media (max-width: 768px) {
+	.header_gnb {
+		display: none !important;
+	}
+
+	.sermon-page-title {
+		min-height: 25vh;
+	}
+
+	.sermon-page-title h1 {
+		font-size: 32px;
+		margin-bottom: 10px;
+	}
+
+	.sermon-page-title p {
+		font-size: 16px;
+	}
+
+	.page-title-inner {
+		padding: 100px 20px;
+	}
+
+	.sermon-container {
+		padding: 40px 16px;
+		width: calc(100% - 32px);
+	}
+
+	.sermon-grid {
+		grid-template-columns: 1fr;
+		gap: 16px;
+		margin-bottom: 40px;
+	}
+
+	.sermon-filters {
+		gap: 10px;
+		margin-bottom: 30px;
+	}
+
+	.sermon-filter-btn {
+		padding: 10px 20px;
+		font-size: 14px;
+		flex: 1 1 calc(50% - 5px);
+	}
+
+	.sermon-register-btn {
+		padding: 12px 24px;
+		font-size: 14px;
+		width: 100%;
+	}
+
+	.sermon-register-section {
+		margin-bottom: 20px;
+	}
+
+	.sermon-card {
+		flex-direction: column;
+	}
+
+	.sermon-thumb {
+		height: 180px;
+	}
+
+	.sermon-info {
+		padding: 20px;
+	}
+
+	.sermon-title {
+		font-size: 16px;
+		margin-bottom: 8px;
+	}
+
+	.sermon-date {
+		font-size: 12px;
+		margin-bottom: 8px;
+	}
+
+	.sermon-verse {
+		font-size: 13px;
+		margin-bottom: 10px;
+	}
+
+	.sermon-pastor {
+		font-size: 12px;
+		margin-top: auto;
+		padding-top: 10px;
+	}
+
+	.sermon-pagination {
+		gap: 4px;
+		margin-top: 30px;
+	}
+
+	.pagination-btn {
+		min-width: 40px;
+		height: 40px;
+		font-size: 14px;
+	}
+
+	.sermon-modal-content {
+		width: 90%;
+		padding: 30px 20px;
+		max-width: 100%;
+		margin: 30px 0;
+	}
+
+	.sermon-modal-content h2 {
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+
+	#sermon-register-form {
+		gap: 12px;
+	}
+
+	.form-row {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+
+	.form-group {
+		gap: 4px;
+	}
+
+	.form-group label {
+		font-size: 13px;
+	}
+
+	.form-group input,
+	.form-group select {
+		padding: 10px 12px;
+		font-size: 13px;
+	}
+
+	.form-actions {
+		gap: 10px;
+		margin-top: 20px;
+	}
+
+	.btn-submit,
+	.btn-cancel {
+		padding: 12px 16px;
+		font-size: 13px;
+	}
+
+	.sns-modal-content {
+		width: 85%;
+		padding: 30px 20px;
+	}
+
+	.sns-modal-content h2 {
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+
+	.sns-buttons {
+		gap: 10px;
+	}
+
+	.sns-btn {
+		padding: 12px 14px;
+		font-size: 13px;
+	}
+
+	.admin-login-divider {
+		margin: 15px 0 12px;
+		font-size: 12px;
+	}
+
+	.admin-login-link {
+		padding: 10px 14px;
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 480px) {
+	.sermon-page-title {
+		min-height: 20vh;
+	}
+
+	.sermon-page-title h1 {
+		font-size: 24px;
+		margin-bottom: 8px;
+	}
+
+	.sermon-page-title p {
+		font-size: 14px;
+	}
+
+	.page-title-inner {
+		padding: 60px 15px;
+	}
+
+	.sermon-container {
+		padding: 30px 12px;
+		width: calc(100% - 24px);
+	}
+
+	.sermon-grid {
+		gap: 12px;
+		margin-bottom: 30px;
+	}
+
+	.sermon-filters {
+		gap: 8px;
+		margin-bottom: 20px;
+		flex-direction: column;
+	}
+
+	.sermon-filter-btn {
+		padding: 10px 16px;
+		font-size: 12px;
+		flex: 1 1 auto;
+		width: 100%;
+	}
+
+	.sermon-register-btn {
+		padding: 11px 20px;
+		font-size: 13px;
+	}
+
+	.sermon-thumb {
+		height: 160px;
+		font-size: 50px;
+	}
+
+	.sermon-info {
+		padding: 16px;
+	}
+
+	.sermon-title {
+		font-size: 14px;
+		margin-bottom: 6px;
+	}
+
+	.sermon-date {
+		font-size: 11px;
+		margin-bottom: 6px;
+	}
+
+	.sermon-verse {
+		font-size: 12px;
+		margin-bottom: 8px;
+	}
+
+	.sermon-pastor {
+		font-size: 11px;
+		padding-top: 8px;
+	}
+
+	.sermon-pagination {
+		gap: 3px;
+		margin-top: 20px;
+	}
+
+	.pagination-btn {
+		min-width: 35px;
+		height: 35px;
+		font-size: 12px;
+	}
+
+	.sermon-modal-content {
+		width: 90%;
+		padding: 25px 15px;
+		margin: 20px 0;
+	}
+
+	.sermon-modal-content h2 {
+		font-size: 16px;
+		margin-bottom: 15px;
+	}
+
+	.sermon-modal-close {
+		font-size: 24px;
+		top: 10px;
+		right: 10px;
+	}
+
+	#sermon-register-form {
+		gap: 10px;
+	}
+
+	.form-group {
+		gap: 3px;
+	}
+
+	.form-group label {
+		font-size: 12px;
+	}
+
+	.form-group input,
+	.form-group select {
+		padding: 8px 10px;
+		font-size: 12px;
+	}
+
+	.form-actions {
+		gap: 8px;
+		margin-top: 15px;
+	}
+
+	.btn-submit,
+	.btn-cancel {
+		padding: 10px 14px;
+		font-size: 12px;
+	}
+
+	.sns-modal-content {
+		width: 90%;
+		padding: 25px 15px;
+	}
+
+	.sns-modal-content h2 {
+		font-size: 16px;
+		margin-bottom: 15px;
+	}
+
+	.sns-btn {
+		padding: 11px 12px;
+		font-size: 12px;
+	}
+
+	.admin-login-divider {
+		font-size: 11px;
+	}
+
+	.admin-login-link {
+		padding: 10px 12px;
+		font-size: 12px;
+	}
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>커뮤니티 — 대성교회</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" th:href="@{/css/normalize.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/responsible.css}">
+<link rel="stylesheet" th:href="@{/css/modern-design.css}">
+<link rel="stylesheet" th:href="@{/css/footer.css}">
+<link rel="stylesheet" th:href="@{/css/sermons-gallery.css}">
+<link rel="stylesheet" th:href="@{/css/news.css}">
+</head>
+<body>
+<div id="wrap">
+    <div id="vis_sec" class="vis_sec_bg" style="padding: 0px;">
+        <header id="header">
+            <link rel="stylesheet" th:href="@{/css/superfish.css}">
+            <link rel="stylesheet" th:href="@{/css/style.css}">
+            <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+            <script th:src="@{/css/jquery.slicknav.js}"></script>
+            <script type="text/javascript">
+                $(document).ready(function(){ $('#menu').slicknav(); });
+            </script>
+            <div class="header_top_item">
+                <ul class="top_section" style="right:-5px;top:20px">
+                    <li><a th:href="@{/admin}">관리자</a></li>
+                </ul>
+                <h1><a th:href="@{/}"><img th:src="@{/image/index_logo_daeseong.png}" alt="대성교회" /></a></h1>
+                <div id="m_nav"></div>
+                <div class="header_gnb">
+                    <div class="main_nav">
+                        <nav class="nav">
+                            <ul class="sf-menu" id="menu">
+                                <li><a th:href="@{/about}">교회소개</a></li>
+                                <li><a th:href="@{/sermons}">설교영상</a></li>
+                                <li><a th:href="@{/news}">커뮤니티</a></li>
+                                <li><a th:href="@{/location}">오시는길</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="news-page-title"></div>
+
+    <div class="news-container">
+        <div class="news-register-section">
+            <button class="news-register-btn" id="news-register-open">+ 커뮤니티 글 등록</button>
+        </div>
+
+        <div class="news-filters">
+            <button class="news-filter-btn" th:classappend="${currentType == 'gospel'}  ? ' active'" th:onclick="'loadNews(\'gospel\', 1)'" >복음통일</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'news'}    ? ' active'" th:onclick="'loadNews(\'news\', 1)'"   >교회소식</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'bulletin'}? ' active'" th:onclick="'loadNews(\'bulletin\', 1)'">주보</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'poetry'}  ? ' active'" th:onclick="'loadNews(\'poetry\', 1)'" >시집</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'column'}  ? ' active'" th:onclick="'loadNews(\'column\', 1)'" >칼럼</button>
+            <button class="news-filter-btn" th:classappend="${currentType == 'study'}   ? ' active'" th:onclick="'loadNews(\'study\', 1)'"  >Bible Study</button>
+        </div>
+
+        <div class="news-list" id="news-list">
+            <!-- 빈 상태 -->
+            <div th:if="${#lists.isEmpty(newsList)}"
+                 style="text-align:center;padding:60px;color:#aaa;">
+                등록된 게시글이 없습니다.
+            </div>
+            <!-- 아코디언 아이템 반복 -->
+            <div class="accordion-item"
+                 th:each="news : ${newsList}"
+                 th:data-type="${news.type}">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-left">
+                        <div class="accordion-icon"
+                             th:text="${news.type == 'gospel'  ? '✝️' :
+                                       news.type == 'news'    ? '📰' :
+                                       news.type == 'bulletin'? '📄' :
+                                       news.type == 'poetry'  ? '✨' :
+                                       news.type == 'column'  ? '✍️' : '📖'}">✝️</div>
+                        <div class="accordion-title" th:text="${news.title}"></div>
+                    </div>
+                    <div class="accordion-toggle">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="news-date"
+                         th:text="${news.author != null ? news.author + ' | ' : ''} +
+                                   ${#temporals.format(news.newsDate, 'yyyy.MM.dd')}"></div>
+                    <div class="news-desc" th:utext="${news.content}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="news-pagination" id="news-pagination"
+             th:data-current="${currentPage}"
+             th:data-total="${totalPages}"
+             th:data-type="${currentType}">
+            <button class="pagination-btn"
+                    th:classappend="${currentPage <= 1} ? ' disabled'"
+                    th:data-type="${currentType}"
+                    th:data-page="${currentPage - 1}">&lt;</button>
+            <button class="pagination-btn"
+                    th:each="i : ${#numbers.sequence(1, totalPages)}"
+                    th:text="${i}"
+                    th:classappend="${i == currentPage} ? ' active'"
+                    th:data-type="${currentType}"
+                    th:data-page="${i}"></button>
+            <button class="pagination-btn"
+                    th:classappend="${currentPage >= totalPages} ? ' disabled'"
+                    th:data-type="${currentType}"
+                    th:data-page="${currentPage + 1}">&gt;</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="inner_footer">
+            <p><img th:src="@{/image/footer_logo2.png}" alt="" /></p>
+            <address>
+                <p><a href="#">온라인 헌금계좌 안내 &nbsp;&nbsp;&nbsp;&nbsp;예금주: &nbsp;대한예수교장로회 대성교회, &nbsp;&nbsp;국민은행, 867901-00-030346</a></p>
+                <p>우편번호 (17006) 경기도 용인시 기흥구 동백중앙로 175  우함빌딩 901호</p>
+                <p>E-Mail : daeseong2013@naver.com</p>
+                <p th:text="'Copyright ⓒ ' + ${#temporals.year(#temporals.createNow())} + ' 대성교회 all right reserved'"></p>
+            </address>
+        </div>
+    </footer>
+</div>
+
+<script>
+    // 아코디언 토글
+    function toggleAccordion(header) {
+        const content = header.nextElementSibling;
+        const toggle  = header.querySelector('.accordion-toggle');
+        const isOpen  = content.classList.contains('open');
+        // 모두 닫기
+        document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+        document.querySelectorAll('.accordion-toggle').forEach(t => t.textContent = '+');
+        if (!isOpen) {
+            content.classList.add('open');
+            toggle.textContent = '−';
+        }
+    }
+
+    // 탭 필터 + 페이지네이션: API 호출 후 DOM 갱신
+    function loadNews(type, page) {
+        const pagination  = document.getElementById('news-pagination');
+        const totalPages  = parseInt(pagination.dataset.total) || 1;
+        if (page < 1 || page > totalPages) return;
+
+        fetch(`/api/news?type=${type}&page=${page}`)
+            .then(r => r.json())
+            .then(data => {
+                renderNewsList(data.news);
+                renderNewsPagination(type, data.currentPage, data.totalPages);
+                // 활성 탭 업데이트
+                const typeOrder = ['gospel', 'news', 'bulletin', 'poetry', 'column', 'study'];
+                document.querySelectorAll('.news-filter-btn').forEach((btn, idx) => {
+                    btn.classList.toggle('active', typeOrder[idx] === type);
+                });
+            });
+    }
+
+    function renderNewsList(newsList) {
+        const container = document.getElementById('news-list');
+        if (!newsList || newsList.length === 0) {
+            container.innerHTML = '<div style="text-align:center;padding:60px;color:#aaa;">등록된 게시글이 없습니다.</div>';
+            return;
+        }
+        const iconMap  = { gospel:'✝️', news:'📰', bulletin:'📄', poetry:'✨', column:'✍️', study:'📖' };
+        container.innerHTML = newsList.map(n => {
+            const dateStr = n.newsDate
+                ? (Array.isArray(n.newsDate)
+                    ? `${n.newsDate[0]}.${String(n.newsDate[1]).padStart(2,'0')}.${String(n.newsDate[2]).padStart(2,'0')}`
+                    : n.newsDate.slice(0, 10).replace(/-/g, '.'))
+                : '';
+            const authorDate = (n.author ? n.author + ' | ' : '') + dateStr;
+            return `
+            <div class="accordion-item" data-type="${n.type}">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-left">
+                        <div class="accordion-icon">${iconMap[n.type] || '📌'}</div>
+                        <div class="accordion-title">${n.title}</div>
+                    </div>
+                    <div class="accordion-toggle">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="news-date">${authorDate}</div>
+                    <div class="news-desc">${n.content || ''}</div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    document.getElementById('news-pagination').addEventListener('click', function(e) {
+        const btn = e.target.closest('.pagination-btn');
+        if (!btn || btn.classList.contains('disabled')) return;
+        loadNews(btn.dataset.type, parseInt(btn.dataset.page));
+    });
+
+    function renderNewsPagination(type, currentPage, totalPages) {
+        const container = document.getElementById('news-pagination');
+        container.dataset.current = currentPage;
+        container.dataset.total   = totalPages;
+        container.dataset.type    = type;
+
+        let html = `<button class="pagination-btn${currentPage <= 1 ? ' disabled' : ''}"
+                            onclick="loadNews('${type}', ${currentPage - 1})">&lt;</button>`;
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<button class="pagination-btn${i === currentPage ? ' active' : ''}"
+                             onclick="loadNews('${type}', ${i})">${i}</button>`;
+        }
+        html += `<button class="pagination-btn${currentPage >= totalPages ? ' disabled' : ''}"
+                         onclick="loadNews('${type}', ${currentPage + 1})">&gt;</button>`;
+        container.innerHTML = html;
+    }
+</script>
+</body>
+</html>

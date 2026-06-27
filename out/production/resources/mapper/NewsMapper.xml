@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.church.daeseong.mapper.NewsMapper">
+
+    <resultMap id="newsResultMap" type="News">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="type" column="type"/>
+        <result property="content" column="content"/>
+        <result property="author" column="author"/>
+        <result property="newsDate" column="news_date"/>
+        <result property="createdAt" column="created_at"/>
+        <collection property="images" ofType="NewsImage">
+            <id property="id" column="img_id"/>
+            <result property="newsId" column="news_id"/>
+            <result property="imagePath" column="image_path"/>
+            <result property="sortOrder" column="sort_order"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectNews" resultType="News">
+        SELECT id, title, type, content, author, news_date, created_at
+        FROM news
+        <where>
+            <if test="type != null and type != '' and type != 'all'">
+                AND type = #{type}
+            </if>
+        </where>
+        ORDER BY news_date DESC, id DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countNews" resultType="int">
+        SELECT COUNT(*) FROM news
+        <where>
+            <if test="type != null and type != '' and type != 'all'">
+                AND type = #{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" resultMap="newsResultMap">
+        SELECT n.id, n.title, n.type, n.content, n.author, n.news_date, n.created_at,
+               ni.id AS img_id, ni.news_id, ni.image_path, ni.sort_order
+        FROM news n
+        LEFT JOIN news_image ni ON n.id = ni.news_id
+        WHERE n.id = #{id}
+        ORDER BY ni.sort_order
+    </select>
+
+    <insert id="insertNews" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO news (title, type, content, author, news_date)
+        VALUES (#{title}, #{type}, #{content}, #{author}, #{newsDate})
+    </insert>
+
+    <update id="updateNews">
+        UPDATE news
+        SET title    = #{title},
+            type     = #{type},
+            content  = #{content},
+            author   = #{author},
+            news_date = #{newsDate}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteNews">
+        DELETE FROM news WHERE id = #{id}
+    </delete>
+
+    <insert id="insertNewsImage">
+        INSERT INTO news_image (news_id, image_path, sort_order)
+        VALUES (#{newsId}, #{imagePath}, #{sortOrder})
+    </insert>
+
+    <delete id="deleteNewsImages">
+        DELETE FROM news_image WHERE news_id = #{newsId}
+    </delete>
+
+</mapper>
