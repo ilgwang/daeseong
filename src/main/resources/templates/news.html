@@ -68,7 +68,8 @@
             <!-- 아코디언 아이템 반복 -->
             <div class="accordion-item"
                  th:each="news : ${newsList}"
-                 th:data-type="${news.type}">
+                 th:data-type="${news.type}"
+                 th:data-id="${news.id}">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="accordion-left">
                         <div class="accordion-icon"
@@ -82,9 +83,8 @@
                     <div class="accordion-toggle">+</div>
                 </div>
                 <div class="accordion-content">
-                    <div class="news-date"
-                         th:text="${news.author != null ? news.author + ' | ' : ''} +
-                                   ${#temporals.format(news.newsDate, 'yyyy.MM.dd')}"></div>
+                    <div class="content-title" th:text="${news.title}"></div>
+                    <div class="news-images"></div>
                     <div class="news-desc" th:utext="${news.content}"></div>
                 </div>
             </div>
@@ -118,32 +118,85 @@
         loadNews(btn.dataset.type, 1);
     });
 
-    // 아코디언 토글
+    // 아코디언 토글 + 이미지 지연 로딩
     function toggleAccordion(header) {
-        const content = header.nextElementSibling;
-        const toggle  = header.querySelector('.accordion-toggle');
-        const isOpen  = content.classList.contains('open');
-        // 모두 닫기
-        document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+        const item   = header.parentElement;
+        const isOpen = item.classList.contains('active');
+        document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
         document.querySelectorAll('.accordion-toggle').forEach(t => t.textContent = '+');
         if (!isOpen) {
-            content.classList.add('open');
-            toggle.textContent = '−';
+            item.classList.add('active');
+            header.querySelector('.accordion-toggle').textContent = '−';
+            const imgArea = item.querySelector('.news-images');
+            if (imgArea && !imgArea.dataset.loaded) {
+                const id = item.dataset.id;
+                if (id) {
+                    fetch(`/api/news/${id}`)
+                        .then(r => r.json())
+                        .then(data => {
+                            imgArea.innerHTML = buildImages(data.images);
+                            imgArea.dataset.loaded = 'true';
+                        });
+                }
+            }
         }
     }
 
-    // 탭 필터 + 페이지네이션: API 호출 후 DOM 갱신
-    function loadNews(type, page) {
-        const pagination  = document.getElementById('news-pagination');
-        const totalPages  = parseInt(pagination.dataset.total) || 1;
-        if (page < 1 || page > totalPages) return;
+    function fileType(path) {
+        if (/\.(mp4|webm|ogg|mov|avi|mkv)$/i.test(path)) return 'video';
+        if (/\.pdf$/i.test(path)) return 'pdf';
+        return 'image';
+    }
 
+    function buildFileItem(path, active) {
+        const cls = 'slider-item' + (active ? ' active' : '');
+        const t = fileType(path);
+        if (t === 'video') return `<div class="${cls}"><video class="slider-video" controls><source src="${path}"></video></div>`;
+        if (t === 'pdf')   return `<div class="${cls}" style="display:flex;align-items:center;justify-content:center;height:100%"><a href="${path}" target="_blank" class="pdf-link">📄 PDF 파일 보기</a></div>`;
+        return `<div class="${cls}"><img src="${path}" alt=""></div>`;
+    }
+
+    function buildImages(images) {
+        if (!images || images.length === 0) return '';
+
+        if (images.length === 1) {
+            const path = images[0].imagePath;
+            const t = fileType(path);
+            if (t === 'video') return `<div class="news-image-area"><video class="news-video" controls><source src="${path}"></video></div>`;
+            if (t === 'pdf')   return `<div class="news-image-area"><a href="${path}" target="_blank" class="pdf-link">📄 PDF 파일 보기</a></div>`;
+            return `<div class="news-image-area"><img src="${path}" alt=""></div>`;
+        }
+
+        const items = images.map((img, i) => buildFileItem(img.imagePath, i === 0)).join('');
+        const dots  = images.map((_, i) => `<span class="dot${i===0?' active':''}"></span>`).join('');
+        return `<div class="image-slider-container">
+            <div class="image-slider">${items}</div>
+            <button class="slider-prev" onclick="slideMove(this,-1)">&#8249;</button>
+            <button class="slider-next" onclick="slideMove(this,1)">&#8250;</button>
+            <div class="slider-dots">${dots}</div>
+        </div>`;
+    }
+
+    function slideMove(btn, dir) {
+        const container = btn.closest('.image-slider-container');
+        const items = container.querySelectorAll('.slider-item');
+        const dots  = container.querySelectorAll('.dot');
+        let cur = [...items].findIndex(i => i.classList.contains('active'));
+        const prevVideo = items[cur].querySelector('video');
+        if (prevVideo) prevVideo.pause();
+        items[cur].classList.remove('active');
+        dots[cur].classList.remove('active');
+        cur = (cur + dir + items.length) % items.length;
+        items[cur].classList.add('active');
+        dots[cur].classList.add('active');
+    }
+
+    function loadNews(type, page) {
         fetch(`/api/news?type=${type}&page=${page}`)
             .then(r => r.json())
             .then(data => {
                 renderNewsList(data.news);
                 renderNewsPagination(type, data.currentPage, data.totalPages);
-                // 활성 탭 업데이트
                 const typeOrder = ['gospel', 'news', 'bulletin', 'poetry', 'column', 'study'];
                 document.querySelectorAll('.news-filter-btn').forEach((btn, idx) => {
                     btn.classList.toggle('active', typeOrder[idx] === type);
@@ -157,16 +210,9 @@
             container.innerHTML = '<div style="text-align:center;padding:60px;color:#aaa;">등록된 게시글이 없습니다.</div>';
             return;
         }
-        const iconMap  = { gospel:'✝️', news:'📰', bulletin:'📄', poetry:'✨', column:'✍️', study:'📖' };
-        container.innerHTML = newsList.map(n => {
-            const dateStr = n.newsDate
-                ? (Array.isArray(n.newsDate)
-                    ? `${n.newsDate[0]}.${String(n.newsDate[1]).padStart(2,'0')}.${String(n.newsDate[2]).padStart(2,'0')}`
-                    : n.newsDate.slice(0, 10).replace(/-/g, '.'))
-                : '';
-            const authorDate = (n.author ? n.author + ' | ' : '') + dateStr;
-            return `
-            <div class="accordion-item" data-type="${n.type}">
+        const iconMap = { gospel:'✝️', news:'📰', bulletin:'📄', poetry:'✨', column:'✍️', study:'📖' };
+        container.innerHTML = newsList.map(n => `
+            <div class="accordion-item" data-type="${n.type}" data-id="${n.id}">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="accordion-left">
                         <div class="accordion-icon">${iconMap[n.type] || '📌'}</div>
@@ -175,11 +221,11 @@
                     <div class="accordion-toggle">+</div>
                 </div>
                 <div class="accordion-content">
-                    <div class="news-date">${authorDate}</div>
+                    <div class="content-title">${n.title}</div>
+                    <div class="news-images"></div>
                     <div class="news-desc">${n.content || ''}</div>
                 </div>
-            </div>`;
-        }).join('');
+            </div>`).join('');
     }
 
     document.getElementById('news-pagination').addEventListener('click', function(e) {
@@ -193,7 +239,6 @@
         container.dataset.current = currentPage;
         container.dataset.total   = totalPages;
         container.dataset.type    = type;
-
         if (!totalPages || totalPages <= 1) { container.innerHTML = ''; return; }
 
         const WINDOW = 10;
@@ -201,21 +246,17 @@
         let end   = Math.min(totalPages, start + WINDOW - 1);
         if (end - start < WINDOW - 1) start = Math.max(1, end - WINDOW + 1);
 
-        let html = `<button class="pagination-btn${currentPage <= 1 ? ' disabled' : ''}"
-                            onclick="loadNews('${type}', ${currentPage - 1})">&lt;</button>`;
+        let html = `<button class="pagination-btn${currentPage <= 1 ? ' disabled' : ''}" onclick="loadNews('${type}',${currentPage-1})">&lt;</button>`;
         for (let i = start; i <= end; i++) {
-            html += `<button class="pagination-btn${i === currentPage ? ' active' : ''}"
-                             onclick="loadNews('${type}', ${i})">${i}</button>`;
+            html += `<button class="pagination-btn${i===currentPage?' active':''}" onclick="loadNews('${type}',${i})">${i}</button>`;
         }
-        html += `<button class="pagination-btn${currentPage >= totalPages ? ' disabled' : ''}"
-                         onclick="loadNews('${type}', ${currentPage + 1})">&gt;</button>`;
+        html += `<button class="pagination-btn${currentPage >= totalPages ? ' disabled' : ''}" onclick="loadNews('${type}',${currentPage+1})">&gt;</button>`;
         container.innerHTML = html;
     }
 
-    // 초기 로드 시 windowed 페이지네이션 렌더
     (function() {
         const pg = document.getElementById('news-pagination');
-        renderNewsPagination(pg.dataset.type, parseInt(pg.dataset.current) || 1, parseInt(pg.dataset.total) || 1);
+        renderNewsPagination(pg.dataset.type, parseInt(pg.dataset.current)||1, parseInt(pg.dataset.total)||1);
     })();
 </script>
 </body>

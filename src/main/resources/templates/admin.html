@@ -83,13 +83,17 @@ body { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; background: #f4
         </a>
     </nav>
     <div class="sidebar-bottom">
-        <a th:href="@{/}" class="logout-btn">← 사이트로 돌아가기</a>
+        <a th:href="@{/}" class="logout-btn" style="margin-bottom:8px">← 사이트로 돌아가기</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="logout-btn">로그아웃</button>
+        </form>
     </div>
 </div>
 
 <div class="main">
-    <div class="topbar">
+    <div class="topbar" style="display:flex;justify-content:space-between;align-items:center;">
         <h1 id="topbar-title">설교영상 관리</h1>
+        <span style="font-size:14px;color:#666;" th:text="${adminName} + ' 님'"></span>
     </div>
     <div class="page-content">
         <!-- 설교영상 패널 -->
@@ -126,6 +130,7 @@ body { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; background: #f4
                     </thead>
                     <tbody id="communityTbody"></tbody>
                 </table>
+                <div class="admin-pagination" id="communityPagination"></div>
             </div>
         </div>
     </div>
@@ -184,7 +189,13 @@ body { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; background: #f4
                 </select>
             </div>
             <div class="form-group"><label>작성자</label><input type="text" id="postAuthor" placeholder="작성자 이름"></div>
-            <div class="form-group"><label>내용 *</label><textarea id="postContent" rows="6" placeholder="내용을 입력하세요"></textarea></div>
+            <div class="form-group"><label>내용</label><textarea id="postContent" rows="6" placeholder="내용을 입력하세요"></textarea></div>
+            <div class="form-group">
+                <label>이미지 / PDF / 동영상 첨부 (여러 개 선택 가능, 동영상 100MB 미만)</label>
+                <input type="file" id="postFiles" multiple accept="image/*,.pdf,video/*"
+                       style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit;">
+                <div id="postFileList" style="margin-top:8px;font-size:12px;color:#666;line-height:1.8;"></div>
+            </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-cancel" onclick="closeModal('postModal')">취소</button>
@@ -320,60 +331,125 @@ body { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; background: #f4
     }
 
     // ── 커뮤니티 ──
-    function loadPosts() {
-        fetch(`${API.news}?type=all&page=1`)
+    let postCurrentPage = 1;
+
+    function loadPosts(page) {
+        page = page || postCurrentPage;
+        fetch(`${API.news}?type=all&page=${page}&size=10`)
             .then(r => r.json())
-            .then(data => renderPosts(data.news || []));
+            .then(data => {
+                postCurrentPage = data.currentPage;
+                renderPosts(data.news || [], data.currentPage, data.totalPages);
+            });
     }
 
-    function renderPosts(list) {
+    function renderPosts(list, currentPage, totalPages) {
         document.getElementById('communityTbody').innerHTML = list.length === 0
             ? '<tr><td colspan="6" class="empty-state">등록된 게시글이 없습니다.</td></tr>'
             : list.map((p, i) => `<tr>
-                <td>${i+1}</td>
+                <td>${(currentPage - 1) * 10 + i + 1}</td>
                 <td><strong>${esc(p.title)}</strong></td>
                 <td>${formatDate(p.newsDate)}</td>
                 <td>${newsLabel[p.type] || p.type}</td>
                 <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc((p.content||'').replace(/<[^>]+>/g,'').slice(0,60))}</td>
                 <td>
+                    <button class="btn btn-edit" onclick="editPost(${p.id})">수정</button>
                     <button class="btn btn-danger" onclick="deletePost(${p.id})">삭제</button>
                 </td>
             </tr>`).join('');
+
+        const pg = document.getElementById('communityPagination');
+        if (!totalPages || totalPages <= 1) { pg.innerHTML = ''; return; }
+
+        const WINDOW = 10;
+        let start = Math.max(1, currentPage - Math.floor(WINDOW / 2));
+        let end   = Math.min(totalPages, start + WINDOW - 1);
+        if (end - start < WINDOW - 1) start = Math.max(1, end - WINDOW + 1);
+
+        let html = `<button class="${currentPage <= 1 ? 'disabled' : ''}" onclick="loadPosts(${currentPage - 1})">&lt;</button>`;
+        for (let i = start; i <= end; i++) {
+            html += `<button class="${i === currentPage ? 'active' : ''}" onclick="loadPosts(${i})">${i}</button>`;
+        }
+        html += `<button class="${currentPage >= totalPages ? 'disabled' : ''}" onclick="loadPosts(${currentPage + 1})">&gt;</button>`;
+        pg.innerHTML = html;
+    }
+
+    function editPost(id) {
+        fetch(`${API.news}/${id}`)
+            .then(r => r.json())
+            .then(p => {
+                document.getElementById('postEditId').value    = p.id;
+                document.getElementById('postTitle').value     = p.title || '';
+                document.getElementById('postDate').value      = formatDate(p.newsDate);
+                document.getElementById('postCategory').value  = p.type || 'gospel';
+                document.getElementById('postAuthor').value    = p.author || '';
+                document.getElementById('postContent').value   = p.content || '';
+                document.getElementById('postFiles').value     = '';
+
+                const existing = (p.images || []).map(img => {
+                    const isVideo = /\.(mp4|webm|ogg|mov|avi|mkv)$/i.test(img.imagePath);
+                    const isPdf   = img.imagePath.toLowerCase().endsWith('.pdf');
+                    const icon    = isVideo ? '🎬' : isPdf ? '📄' : '🖼️';
+                    return `<span>${icon} <a href="${img.imagePath}" target="_blank" style="color:#6b22a8">${img.imagePath.split('/').pop()}</a></span>`;
+                });
+                document.getElementById('postFileList').innerHTML =
+                    existing.length ? '<div style="color:#888;margin-bottom:4px">기존 첨부파일:</div>' + existing.join('<br>') : '';
+
+                document.getElementById('postModalTitle').textContent = '게시글 수정';
+                document.getElementById('postModal').classList.add('open');
+            });
     }
 
     function openPostModal() {
         ['postEditId','postTitle','postContent','postAuthor'].forEach(id => document.getElementById(id).value = '');
         document.getElementById('postDate').value = new Date().toISOString().slice(0,10);
         document.getElementById('postCategory').value = 'gospel';
+        document.getElementById('postFiles').value = '';
+        document.getElementById('postFileList').innerHTML = '';
         document.getElementById('postModalTitle').textContent = '게시글 등록';
         document.getElementById('postModal').classList.add('open');
     }
 
+    document.getElementById('postFiles').addEventListener('change', function() {
+        const list = Array.from(this.files).map(f => {
+            const icon = f.type.startsWith('video/') ? '🎬' : f.type === 'application/pdf' ? '📄' : '🖼️';
+            const size = f.size >= 1024*1024
+                ? `${(f.size/1024/1024).toFixed(1)}MB`
+                : `${(f.size/1024).toFixed(0)}KB`;
+            return `<span>${icon} ${f.name} <small style="color:#aaa">(${size})</small></span>`;
+        });
+        document.getElementById('postFileList').innerHTML = list.join('<br>');
+    });
+
     function savePost() {
-        const title   = document.getElementById('postTitle').value.trim();
-        const date    = document.getElementById('postDate').value;
-        const content = document.getElementById('postContent').value.trim();
-        if (!title)   { alert('제목을 입력하세요.'); return; }
-        if (!date)    { alert('날짜를 선택하세요.'); return; }
-        if (!content) { alert('내용을 입력하세요.'); return; }
+        const title = document.getElementById('postTitle').value.trim();
+        const date  = document.getElementById('postDate').value;
+        if (!title) { alert('제목을 입력하세요.'); return; }
+        if (!date)  { alert('날짜를 선택하세요.'); return; }
 
-        const payload = {
-            title,
-            type:     document.getElementById('postCategory').value,
-            content,
-            author:   document.getElementById('postAuthor').value.trim(),
-            newsDate: date
-        };
+        const formData = new FormData();
+        formData.append('title',    title);
+        formData.append('type',     document.getElementById('postCategory').value);
+        formData.append('content',  document.getElementById('postContent').value.trim());
+        formData.append('author',   document.getElementById('postAuthor').value.trim());
+        formData.append('newsDate', date);
 
-        fetch(API.news, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        const files = document.getElementById('postFiles').files;
+        for (const file of files) formData.append('files', file);
+
+        const editId = document.getElementById('postEditId').value;
+        const method = editId ? 'PUT' : 'POST';
+        const url    = editId ? `${API.news}/${editId}` : API.news;
+
+        fetch(url, { method, body: formData })
             .then(r => r.json())
-            .then(() => { closeModal('postModal'); loadPosts(); });
+            .then(() => { closeModal('postModal'); loadPosts(editId ? postCurrentPage : 1); });
     }
 
     function deletePost(id) {
         if (!confirm('이 게시글을 삭제하시겠습니까?')) return;
         fetch(`${API.news}/${id}`, { method: 'DELETE' })
-            .then(() => loadPosts());
+            .then(() => loadPosts(postCurrentPage));
     }
 
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
